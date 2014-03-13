@@ -1,5 +1,7 @@
 package bestroomie.gui;
+import java.util.ArrayList;
 
+import bestroomie.entities.*;
 
 /**
  * PreCondition: When a user successfully logs in and if has a bill to share with 
@@ -13,7 +15,8 @@ package bestroomie.gui;
  * **/
 public class TransManageGUI {
 	
-	
+	BRUser transManager;
+	ArrayList<BRGroup> groupList;
 	
 	/**
 	 * PreCondition: When a user successfully logs in and 
@@ -24,4 +27,27 @@ public class TransManageGUI {
 		
 		
 	}
+	
+	/**
+	 * PreCondition: The user entered the transaction management UI. 
+	 * 
+	 * PostCondition: The user approves an existing trans or the user add a new trans
+	 * **/
+	public void showTransactions() {
+		
+		
+	}
+	
+	/***
+	 * PreCondition: The user clicked on the "Edit new transaction button"
+	 * PostCondition: The user fill in the transactions details, such as 
+	 * 				  bill undertakers, amounts, ..... These information 
+	 * 				  will be added to the database. 
+	 * 
+	 * **/
+	public void addTransaction() {
+		
+		
+	}
+	
 }

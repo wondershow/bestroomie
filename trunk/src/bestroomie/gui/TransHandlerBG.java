@@ -14,6 +14,32 @@ package bestroomie.gui;
 public class TransHandlerBG {
 	
 	
+	/**
+	 * @param transaction/bill needs to reviewed. 
+	 * 
+	 * */
+	public TransHandlerBG() {
+		
+		
+	}
 	
+	/***
+	 * @Precondition: The user selected a specific trsaction to handle 
+	 * @Postcondition: The user clicked the approve button and the database
+	 * 				   will be updated if all the involved users approved this bill,
+	 *                 otherwise nothing will be done.
+	 * **/
+	public void approveTransaction() {
+		
+	}
 	
+	/**
+	 * @Precondition: The user selected a specific trsaction to handle 
+	 * @Postconditoin: The user clicked the reject button and a rebuttal
+	 * 				   notification will be sented to the creator
+	 * **/
+	public void rejectTransaction() {
+		
+		
+	}
 }

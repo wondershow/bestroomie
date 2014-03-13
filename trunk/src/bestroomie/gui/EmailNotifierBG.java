@@ -19,4 +19,16 @@ public class EmailNotifierBG {
 		
 	}
 
+	/***
+	 * @Precondition: An transaction is created by an user.
+	 * 
+	 * @Postcondition: Extract all the information from that transaction and 
+	 *                 create an email text and send this email to all the 
+	 *                 receipts. 
+	 * 				 
+	 * **/
+	public void sendEmailNotify() {
+		
+		
+	}
 }
