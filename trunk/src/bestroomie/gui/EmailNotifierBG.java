@@ -1,12 +1,11 @@
 package bestroomie.gui;
 /**
- * PreCondition: A User successfully add a transaction/bill, specifying the 
- * 				 total amount, members to share, group, ways to share. 
- * 
- * 
- * PostCondition: All the related bill sharing users will receive an email specifying
- * 				 the transaction details and asking him/her to approve this transaction.
- * 				
+ * This is a background class. A User successfully add a transaction/bill, specifying the 
+ * total amount, members to share, group, ways to share. All the related bill sharing users will receive an email specifying
+ * the transaction details and asking him/her to approve this transaction.
+ * 		
+ * Invariants: 
+ *       -User is in log in status		
  * **/
 public class EmailNotifierBG {
 	

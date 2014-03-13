@@ -1,15 +1,17 @@
 package bestroomie.gui;
 
+import bestroomie.entities.BRBill;
+
 
 /***
- * PreCondition: The user is logged in and the GUI displays the transactions/bills
- * 				 in which he/she is involved. 
+ * The user is logged in and the GUI displays the transactions/bills
+ * in which he/she is involved.If the user approved/confirmed the transaction, this class will check if all 
+ * the related users have approved the transaction, if it is approved by everyone,
+ * the status of the bill in the database will changed. 
  * 
- * 
- * PostCondition:If the user approved/confirmed the transaction, this class will check if all 
- * 				 the related users have approved the transaction, if it is approved by everyone,
- * 				 the status of the bill in the database will changed. 
- * @author aniu-lei
+ * Invariants: 
+ *       -User is in log in status
+ *       -There are transactions this user has not reviewed yet
  * **/
 public class TransHandlerBG {
 	
@@ -29,7 +31,7 @@ public class TransHandlerBG {
 	 * 				   will be updated if all the involved users approved this bill,
 	 *                 otherwise nothing will be done.
 	 * **/
-	public void approveTransaction() {
+	public void approveTransaction(BRBill id) {
 		
 	}
 	
@@ -38,7 +40,7 @@ public class TransHandlerBG {
 	 * @Postconditoin: The user clicked the reject button and a rebuttal
 	 * 				   notification will be sented to the creator
 	 * **/
-	public void rejectTransaction() {
+	public void rejectTransaction(BRBill id) {
 		
 		
 	}
