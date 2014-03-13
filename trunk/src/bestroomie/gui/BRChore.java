@@ -26,7 +26,7 @@ public class BRChore extends JFrame implements ActionListener {
 	private void initComponents(){...}
 	
 	/**
-	 * This operation litens for button clicks in order to provide the appropriate actions
+	 * This operation listens for button clicks in order to provide the appropriate actions
 	 */
 	public void actionperformed(ActionEvent e){
 		
