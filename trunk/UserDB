@@ -1,2 +1,4 @@
-user	email	password	groups
-Matt Svensson	matt.svensson@gmail.com	password	KrazySix
+user	email	password	groups	
+user1	user1@here.com	FOO	group1,	
+user2	user2@gmail.com	BAR	group2,group1,	
+user3	user3@yahoo.com	BAZ	group1,group2,group3,	
