@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 
 public class readDatabase {
-
+	//Variable to identify if you are on the first line
 	private static boolean firstLine=true;
+	//Variable to identify if the user is valid
 	private static boolean valid=false;
 	private static String email, password;
 	
@@ -24,7 +25,8 @@ public class readDatabase {
             while(fileinput.hasNext())
             {
             	input = fileinput.nextLine();
-
+            	
+            	//Skip the first line
             	if (firstLine){
             		firstLine=false;
             		continue;
@@ -38,12 +40,11 @@ public class readDatabase {
             	password = getItem(input, 3);
             	System.out.println("Third is: " + password);
             	
+            	//If the supplied email and password matches a database entry, make valid=true
             	if ((email.equals(userName)) && (password.equals(password))){
             		valid = true;
             	}
             	
-            	System.out.println();
-
             }
             fileinput.close();
           }catch(FileNotFoundException e)
@@ -58,6 +59,8 @@ public class readDatabase {
           return valid;
 	}
 	
+	//Takes a line of the database and parses the "columns" from it
+	//The string must have a tab between each column and a tab at the end
 	public static String getItem (String line, int itemNumber){
 		String tempItem = line;
 		

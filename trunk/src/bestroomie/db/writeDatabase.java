@@ -36,6 +36,7 @@ public class writeDatabase {
                 	output.println(input);
                 }
                 
+                //Add the given email and password to the database
                 output.println("N/A" + "\t" + uEmail + "\t" + uPassword + "\t" + "N/A" + "\t");
                 
                 fileinput.close();
@@ -89,22 +90,21 @@ public class writeDatabase {
                	         	
                	//Get name
                	String name = getItem(input, 1);
-               	System.out.println("First is: " + name);
+//               	System.out.println("First is: " + name);
                
                	//Get email
                	email = getItem(input, 2);
-               	System.out.println("Second is: " + email);
+//               	System.out.println("Second is: " + email);
                	
                	//Get password
                	String password = getItem(input, 3);
-               	System.out.println("Third is: " + password);
+//               	System.out.println("Third is: " + password);
 
                	//Get groups
                	String groups = getItem(input, 4);
-               	System.out.println("Fourth is: " + groups);
+//               	System.out.println("Fourth is: " + groups);
                	
-               	System.out.println();
-               	
+               	//if the given email address equals the database record, add the group given to the user's list of groups
                	if(uEmail.equals(email)){
                		groups=groups+","+uPassword;
                     output.println(name + '\t' + email + '\t' + password + '\t' + groups + "\t");
@@ -122,7 +122,7 @@ public class writeDatabase {
                File oldFile = new File("userDB");
                oldFile.delete();
 
-               // And rename tmp file's name to old file name
+               // Rename the new file to the old file's name
                File newFile = new File("userDB.temp");
                newFile.renameTo(oldFile);
                
@@ -142,6 +142,8 @@ public class writeDatabase {
         } 
 	}
 	
+	//Takes a line of the database and parses the "columns" from it
+	//The string must have a tab between each column and a tab at the end
 	public static String getItem (String line, int itemNumber){
 		String tempItem = line;
 		for (int i = (itemNumber-1); i>0; i--){
