@@ -1,6 +1,12 @@
+package bestroomie.gui;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import bestroomie.db.readDatabase;
+import bestroomie.db.writeDatabase;
 
 public class TestFrame extends JFrame {
 
@@ -84,7 +90,7 @@ class PassWordDialog extends JDialog {
         addWindowListener(new WindowAdapter() {  
             @Override
             public void windowClosing(WindowEvent e) {  
-                System.exit(0);  
+                System.exit(0);
             }  
         });
 

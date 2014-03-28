@@ -1,3 +1,5 @@
+package bestroomie.db;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -68,7 +70,7 @@ public class writeDatabase {
 	
 	public static void changePassword(String uEmail, String uPassword) {
 
-		 PrintWriter output = null;
+		PrintWriter output = null;
         try {
        	//Create the output file
            output = new PrintWriter(new FileWriter("userDB.temp"));

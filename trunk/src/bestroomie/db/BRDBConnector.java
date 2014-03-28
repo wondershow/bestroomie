@@ -1,0 +1,140 @@
+package bestroomie.db;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class BRDBConnector {
+	public static final String DB_DIR = "";
+	protected String dbFileName = "";
+	protected String fldSeperator = "";
+	
+	
+	public BRDBConnector(String fileName, String sep) {
+		this.fldSeperator = sep;
+		this.dbFileName = fileName;
+	}
+
+	/**
+	 * To read/return a specific line from a file,
+	 * The line is specified by the id and field count 
+	 * @param id, the identifier of record corresponds to that line
+	 * @param fieldCount, in which row of that file is the keyword(the row # starts from 0)
+	 *  */
+	public String BRDBRead(String id,int fieldCount) {
+		String res = null;
+		String dbFileFullPath = BRDBConnector.DB_DIR + this.dbFileName;
+		FileReader fr;
+		BufferedReader br;
+		String strInputLine = "";
+		
+		try {
+			System.out.println("Full path : " + dbFileFullPath);
+			fr = new FileReader(dbFileFullPath);
+			br = new BufferedReader(fr);
+			strInputLine = br.readLine();
+			
+			String[] fields; 
+			while(strInputLine != null) {
+				strInputLine = strInputLine.trim();
+				if(strInputLine.equals("")) continue; //handles empty lines
+				System.out.println("line is : " + strInputLine+"fileds"+",fldSeperator"+this.fldSeperator);
+				fields = strInputLine.split(this.fldSeperator);
+				//write only when the keyword does not exist in the file
+				if(fields[fieldCount].equals(id)) {
+					res = strInputLine;
+					break;
+				}
+				strInputLine = br.readLine();
+			}
+			
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			res = null;
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	
+	
+	/***
+	 * To write a line to a data file, if that line exists, update it,
+	 * @param line, the lines that needs to be updated to the file
+	 * @param id, the identifier of record corresponds to that line
+	 * @param fieldCount, in which row of that file is the keyword(the row # starts from 0)
+	 * **/
+	public boolean BRDBWrite(String line,String id, int fieldCount) {
+		boolean res = true;
+		boolean needToWriteNewLine = true;
+		FileReader fr;
+		BufferedReader br;
+		PrintWriter output = null;
+		String strInputLine = "";
+		String tmpFileFullPath = BRDBConnector.DB_DIR + "userDB.temp";
+		String dbFileFullPath = BRDBConnector.DB_DIR + this.dbFileName;
+		
+		
+		try {
+			
+			output = new PrintWriter(new FileWriter(tmpFileFullPath));
+			fr = new FileReader(dbFileFullPath);
+			br = new BufferedReader(fr);
+			
+			
+			strInputLine = br.readLine();
+			String[] fields; 
+			while(strInputLine != null) {
+				fields = strInputLine.split(this.fldSeperator);
+				//write only when the keyword does not exist in the file
+				if(fields[fieldCount].equals(id)) {
+					output.println(line);
+					needToWriteNewLine = false;
+				}
+				else
+					output.println(strInputLine);
+
+				strInputLine = br.readLine();
+			}
+			
+			if(needToWriteNewLine)
+				output.println(line);
+			
+			
+			
+			output.close();
+			br.close();
+			
+			
+			//to delete the old file and replace it with the swap file
+			File oldFile = new File(dbFileFullPath);
+			oldFile.delete();
+			File newFile = new File(tmpFileFullPath);
+			newFile.renameTo(oldFile);
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+        
+		return res;
+	}
+	
+	
+	public static void main(String args[]) {
+		BRDBConnector test = new BRDBConnector("userDB",":");
+		String testLine = "lei:lei@here.com:FOO:group1,	";
+		boolean res = test.BRDBWrite(testLine, "lei@here.com", 1);
+		
+		String res1 = test.BRDBRead("lei@here.com", 1);
+		System.out.println(res1);
+	}
+	
+}
