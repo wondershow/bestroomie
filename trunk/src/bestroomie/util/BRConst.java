@@ -8,13 +8,25 @@ public final class BRConst {
 	
 	private BRConst() {}
 	
+	public static final String CAPTCHA_FILE_PATH = "brfolder/capfile.jpg";
+	public static final int CAPTCHA_IMG_WIDTH = 120;
+	public static final int CAPTCHA_IMG_HEIGHT = 30;
+	
+	
+	public static final class DBMessages {
+		public static final String ERROR_VALIDATION_FAILURE = "The user name and password dont match";
+		public static final String ERROR_REG_FAILURE_USER_EXISTS = "The input email has been existed in the system";
+		public static final String ERROR_INVALID_EMAIL = "The input email is invalid";
+		public static final String ERROR_WRONG_CAPTCHA = "Please input correct captcha";
+	}
+	
 	public static final class DBFile {
 		private DBFile(){}
 		public static final String FILE_NAME_USERDB = "UserDB";
 		public static final String FILE_NAME_CHORESDB = "ChoresDB";
 		public static final String FILE_NAME_GROUPDB = "GroupDB";
 		public static final String FILE_NAME_TRANSDB = "TransactionDB";
-		public static final String PATH_TO_DB_FOLDER = "dbfolder/";
+		public static final String PATH_TO_DB_FOLDER = "brfolder/dbfolder/";
 		public static final String FIELD_SEPERATOR = ":";
 		public static final String GROUP_SEPERATOR = ",";
 	}
