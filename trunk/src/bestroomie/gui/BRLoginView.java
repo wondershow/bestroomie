@@ -47,7 +47,7 @@ public class BRLoginView extends BRAbstractView {
 	}
 
 	public String getuInputPass() {
-		return jpfPassword.getPassword().toString();
+		return jpfPassword.getText();
 	}
 
 	public void setuInputPass(String uInputPass) {
