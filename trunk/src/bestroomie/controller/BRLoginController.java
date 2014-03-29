@@ -3,6 +3,7 @@ package bestroomie.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRUser;
 import bestroomie.gui.BRLoginView;
 import bestroomie.util.BRUtil;
@@ -30,9 +31,9 @@ public class BRLoginController extends BRAbstractController {
 			else{
 				if(!this.validateUser())
 					this.view.displayView(BRAbstractController.ERROR_VALIDATION_FAILURE);
+				//Go to MainUI
 			}
 			
-//			this.validateUser();
 		} else if (e.getActionCommand().equals("Cancel")) {
 			this.model.reset();
 			this.view.reset();
@@ -62,13 +63,17 @@ public class BRLoginController extends BRAbstractController {
 		this.model.setUserEmail(usrEmail);
 		
 		//cant find a record matching this email in db
-		if(!this.model.load())
-			
+		if(!this.model.load()){
 			res =  false;
-		else if(this.model.getUserPass().equals(this.view.getuName())) {
+		} else if(this.model.getUserPass().equals(this.view.getuInputPass())) {
+			System.out.println("this.model.getUserPass() = " + this.model.getUserPass() 
+					+ " this.view.getuInputPass() " + this.view.getuInputPass());
 			// login successful
+			System.out.println("It matches");
 			res = true;
 		} else {
+			System.out.println("this.model.getUserPass() = " + this.model.getUserPass() 
+					+ " this.view.getuInputPass() " + this.view.getuInputPass());
 			//password of record email cat match the user input password
 			res = false;
 		}
@@ -76,16 +81,17 @@ public class BRLoginController extends BRAbstractController {
 		return res;
 	}
 	
-	
 	public static void main(String args[]) {
-		BRUser m = new BRUser("UserDB","c","d");
+		BRUser m = new BRUser("c","d");
 		BRLoginView v = new BRLoginView();
 		BRLoginController c = new BRLoginController(m,v);
 		v.registerListener(c);
 		v.setVisible(true);
+	}
+
+	@Override
+	protected void goToController(BRAbstractEntity e, BRAbstractController b) {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
 }
