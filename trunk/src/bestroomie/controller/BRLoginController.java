@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRUser;
 import bestroomie.gui.BRLoginView;
+import bestroomie.util.BRConst;
 import bestroomie.util.BRUtil;
 
 
@@ -13,6 +14,7 @@ public class BRLoginController extends BRAbstractController {
 	
 	private BRUser model;
 	private BRLoginView view;
+	private int captchaWord;
 	//private BR
 	
 	public BRLoginController(BRUser m, BRLoginView v) {
@@ -26,11 +28,13 @@ public class BRLoginController extends BRAbstractController {
 		System.out.println("Fuck putin: !!!" + e.getActionCommand()+"111");
 		if(e.getActionCommand().equals("Login")) {
 			
-			if(!this.validateEmail())
-				this.view.displayView(BRAbstractController.ERROR_INVALID_EMAIL);
+			if(!this.validateCaptcha())
+				this.view.displayView(BRConst.DBMessages.ERROR_WRONG_CAPTCHA);
+			else if(!this.validateEmail())
+				this.view.displayView(BRConst.DBMessages.ERROR_INVALID_EMAIL);
 			else{
 				if(!this.validateUser())
-					this.view.displayView(BRAbstractController.ERROR_VALIDATION_FAILURE);
+					this.view.displayView(BRConst.DBMessages.ERROR_VALIDATION_FAILURE);
 				//Go to MainUI
 			}
 			
@@ -48,6 +52,14 @@ public class BRLoginController extends BRAbstractController {
 	}
 	
 	
+	private boolean validateCaptcha() {
+		String captchaTxt = Integer.toString(this.captchaWord);
+		if(captchaTxt.equals(this.view.getCaptchaText()))
+			return true;
+		else
+			return false;
+	}
+	
 	private boolean validateEmail() {
 		return BRUtil.emailValidator(this.view.getuName());
 	}
@@ -55,7 +67,6 @@ public class BRLoginController extends BRAbstractController {
 //	private boolean changePass() {
 //		
 //	}
-	
 	
 	private boolean validateUser() {
 		boolean res = false;
@@ -85,10 +96,18 @@ public class BRLoginController extends BRAbstractController {
 		BRUser m = new BRUser("c","d");
 		BRLoginView v = new BRLoginView();
 		BRLoginController c = new BRLoginController(m,v);
+		c.genCaptcha();
+		v.updateCaptchaImage();
 		v.registerListener(c);
 		v.setVisible(true);
 	}
-
+	
+	
+	private void genCaptcha() {
+		captchaWord = BRUtil.generateCaptcha(BRConst.CAPTCHA_IMG_WIDTH, BRConst.CAPTCHA_IMG_HEIGHT);
+		
+	}
+	
 	@Override
 	protected void goToController(BRAbstractEntity e, BRAbstractController b) {
 		// TODO Auto-generated method stub
