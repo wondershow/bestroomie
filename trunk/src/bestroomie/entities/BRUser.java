@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import bestroomie.db.BRDBConnector;
+import bestroomie.util.BRConst;
 
 /**
  * Precondition
@@ -11,16 +12,13 @@ import bestroomie.db.BRDBConnector;
  ***/
 public class BRUser extends BRAbstractEntity{
 	
-	// which row in the file stores the identifier
-	private static final int ROW_OF_NAME = 0;
-	private static final int ROW_OF_ID = 1;
-	private static final int ROW_OF_PASSWORD = 2;
-	private static final int ROW_OF_GROUP = 3;
-	
+	/**
+	 * headline of dbfile
+	 * */
 	private static final String firstLine = 
-			"Name" + BRAbstractEntity.FIELD_SEPERATOR 
-			+ "Email" + BRAbstractEntity.FIELD_SEPERATOR 
-			+ "Password" + BRAbstractEntity.FIELD_SEPERATOR + "Group";
+			"Name" + BRConst.DBFile.FIELD_SEPERATOR 
+			+ "Email" + BRConst.DBFile.FIELD_SEPERATOR 
+			+ "Password" + BRConst.DBFile.FIELD_SEPERATOR + "Group";
 	
 	
 	
@@ -34,10 +32,14 @@ public class BRUser extends BRAbstractEntity{
 	private String userInputPass = "";
 
 	
+	public BRUser() {
+		this.dbFileName = BRConst.DBFile.FILE_NAME_USERDB;
+	}
+	
 	
 	/****/
-	public BRUser(String fName, String uEmail, String uPass) {
-		this.fileName = fName;
+	public BRUser(String uEmail, String uPass) {
+		this.dbFileName = BRConst.DBFile.FILE_NAME_USERDB;
 		this.userEmail = uEmail;
 		this.userPass = uPass;
 	}
@@ -46,9 +48,9 @@ public class BRUser extends BRAbstractEntity{
 	@Override
 	public String serilize() {
 		// TODO Auto-generated method stub
-		String res = this.userName + super.FIELD_SEPERATOR 
-					 + this.userEmail +  super.FIELD_SEPERATOR
-					 + this.userPass + super.FIELD_SEPERATOR 
+		String res = this.userName + BRConst.DBFile.FIELD_SEPERATOR 
+					 + this.userEmail +  BRConst.DBFile.FIELD_SEPERATOR 
+					 + this.userPass + BRConst.DBFile.FIELD_SEPERATOR  
 					 + this.userGroup;
 		return res;
 	}
@@ -57,7 +59,7 @@ public class BRUser extends BRAbstractEntity{
 	@Override
 	public boolean loadEntity(String s) {
 		// TODO Auto-generated method stub
-		String tmpStr[] = s.split(BRAbstractEntity.FIELD_SEPERATOR);
+		String tmpStr[] = s.split(BRConst.DBFile.FIELD_SEPERATOR);
 		this.userName = tmpStr[0];
 		this.userEmail = tmpStr[1];
 		this.userPass = tmpStr[2];
@@ -68,9 +70,9 @@ public class BRUser extends BRAbstractEntity{
 	@Override
 	public boolean saveToDB() {
 		// TODO Auto-generated method stub
-		BRDBConnector dbConn = new BRDBConnector(this.fileName,super.FIELD_SEPERATOR);
+		BRDBConnector dbConn = new BRDBConnector(this.dbFileName);
 		String lineStr = this.serilize();
-		boolean res = dbConn.BRDBWrite(lineStr, this.userEmail, BRUser.ROW_OF_ID);
+		boolean res = dbConn.BRDBWrite(lineStr, this.userEmail, BRConst.DBUserFile.ROW_OF_USER_EMAIL);
 		
 		return res;
 	}
@@ -131,15 +133,15 @@ public class BRUser extends BRAbstractEntity{
 	@Override
 	public boolean load() {
 		// TODO Auto-generated method stub
-		BRDBConnector dbConn = new BRDBConnector(this.fileName,super.FIELD_SEPERATOR);
-		String line = dbConn.BRDBRead(this.userEmail, ROW_OF_ID);
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_USERDB);
+		String line = dbConn.BRDBRead(this.userEmail, BRConst.DBUserFile.ROW_OF_USER_EMAIL);
 		if (line == null) // not matching record found
 			return false;
 		else {
-			String strArr[] = line.split(super.FIELD_SEPERATOR);
-			this.setUserGroup(strArr[ROW_OF_GROUP]);
-			this.setUserName(strArr[ROW_OF_NAME]);
-			this.setUserPass(strArr[ROW_OF_PASSWORD]);
+			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+			this.setUserGroup(strArr[BRConst.DBUserFile.ROW_OF_USER_GROUP]);
+			this.setUserName(strArr[BRConst.DBUserFile.ROW_OF_USER_NAME]);
+			this.setUserPass(strArr[BRConst.DBUserFile.ROW_OF_USER_PASS]);
 			return true;
 		}
 	}

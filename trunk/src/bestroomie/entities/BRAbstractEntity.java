@@ -1,10 +1,8 @@
 package bestroomie.entities;
 
 public abstract class BRAbstractEntity {
-	protected String fileName;
+	protected String dbFileName;
 
-	protected static final String FIELD_SEPERATOR = ":";
-	
 	//To convert the model to a sring/line, that can be put into the file
 	protected abstract String serilize();
 	
