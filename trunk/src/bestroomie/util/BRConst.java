@@ -1,0 +1,45 @@
+package bestroomie.util;
+
+/**
+ * We keep all the project wide variables here, such as 
+ * the file name of databases, the field seperator
+ * **/
+public final class BRConst {
+	
+	private BRConst() {}
+	
+	public static final class DBFile {
+		private DBFile(){}
+		public static final String FILE_NAME_USERDB = "UserDB";
+		public static final String FILE_NAME_CHORESDB = "ChoresDB";
+		public static final String FILE_NAME_GROUPDB = "GroupDB";
+		public static final String FILE_NAME_TRANSDB = "TransactionDB";
+		public static final String PATH_TO_DB_FOLDER = "dbfolder/";
+		public static final String FIELD_SEPERATOR = ":";
+		public static final String GROUP_SEPERATOR = ",";
+	}
+	
+	/**
+	 * Definition of db file (user db)
+	 * **/
+	public static final class DBUserFile{
+		private DBUserFile(){}
+		public static final int TOTAL_NUM_OF_ROWS = 4;
+		
+		//first row, user name(row number is 0)
+		public static final int ROW_OF_USER_NAME = 0;
+		public static final String ROW_0_FILED_NAME = "Name";
+		
+		//email row
+		public static final int ROW_OF_USER_EMAIL = 1;
+		public static final String ROW_1_FIELD_NAME = "Email";
+		
+		public static final int ROW_OF_USER_PASS = 2;
+		public static final String ROW_2_FIELD_NAME = "Password";
+		
+		public static final int ROW_OF_USER_GROUP = 3;
+		public static final String ROW_3_FIELD_NAME = "Group";
+	}
+	
+	
+}
