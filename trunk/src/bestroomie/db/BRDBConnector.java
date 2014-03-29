@@ -8,14 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import bestroomie.util.BRConst;
+
 public class BRDBConnector {
-	public static final String DB_DIR = "";
 	protected String dbFileName = "";
 	protected String fldSeperator = "";
-	
-	
-	public BRDBConnector(String fileName, String sep) {
-		this.fldSeperator = sep;
+		
+	public BRDBConnector(String fileName) {
+		this.fldSeperator = BRConst.DBFile.FIELD_SEPERATOR;
+		System.out.println("The file name is " + fileName);
 		this.dbFileName = fileName;
 	}
 
@@ -27,24 +28,24 @@ public class BRDBConnector {
 	 *  */
 	public String BRDBRead(String id,int fieldCount) {
 		String res = null;
-		String dbFileFullPath = BRDBConnector.DB_DIR + this.dbFileName;
+		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + this.dbFileName;
 		FileReader fr;
 		BufferedReader br;
 		String strInputLine = "";
 		
 		try {
-			System.out.println("Full path : " + dbFileFullPath);
 			fr = new FileReader(dbFileFullPath);
 			br = new BufferedReader(fr);
 			strInputLine = br.readLine();
 			
-			String[] fields; 
+			String[] fields;
+			
 			while(strInputLine != null) {
 				strInputLine = strInputLine.trim();
 				if(strInputLine.equals("")) continue; //handles empty lines
-				System.out.println("line is : " + strInputLine+"fileds"+",fldSeperator"+this.fldSeperator);
 				fields = strInputLine.split(this.fldSeperator);
-				//write only when the keyword does not exist in the file
+				System.out.println("Lines is " + strInputLine + ", match id is " + id + ", that field is " + fields[fieldCount]);
+				//find the matching line
 				if(fields[fieldCount].equals(id)) {
 					res = strInputLine;
 					break;
@@ -63,9 +64,9 @@ public class BRDBConnector {
 	}
 	
 	
-	
 	/***
 	 * To write a line to a data file, if that line exists, update it,
+	 * otherwise write a new line to the file
 	 * @param line, the lines that needs to be updated to the file
 	 * @param id, the identifier of record corresponds to that line
 	 * @param fieldCount, in which row of that file is the keyword(the row # starts from 0)
@@ -77,8 +78,8 @@ public class BRDBConnector {
 		BufferedReader br;
 		PrintWriter output = null;
 		String strInputLine = "";
-		String tmpFileFullPath = BRDBConnector.DB_DIR + "userDB.temp";
-		String dbFileFullPath = BRDBConnector.DB_DIR + this.dbFileName;
+		String tmpFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + "userDB.temp";
+		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + this.dbFileName;
 		
 		
 		try {
@@ -129,7 +130,7 @@ public class BRDBConnector {
 	
 	
 	public static void main(String args[]) {
-		BRDBConnector test = new BRDBConnector("userDB",":");
+		BRDBConnector test = new BRDBConnector("userDB");
 		String testLine = "lei:lei@here.com:FOO:group1,	";
 		boolean res = test.BRDBWrite(testLine, "lei@here.com", 1);
 		
