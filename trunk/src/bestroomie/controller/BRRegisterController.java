@@ -73,13 +73,20 @@ public class BRRegisterController extends BRAbstractController {
 			res =  false;
 		} else {
 			//Print the user email that will be registered and the full line to be added to the DB
-			System.out.println(this.model.getUserEmail() + "  Will be registered");
-			String userLine = this.view.getuName()+":"+this.view.getuEmail()+":"+this.view.getuInputPass()+":"+",";
-			System.out.println(userLine);
+			//System.out.println(this.model.getUserEmail() + "  Will be registered");
+			this.model.setUserName(this.view.getuName());
+			this.model.setUserPass(this.view.getuInputPass());
+			this.model.setUserEmail(this.view.getuEmail());
+			this.model.setUserGroup("");
+			
+			//String userLine = this.view.getuName()+":"+this.view.getuEmail()+":"+this.view.getuInputPass()+":"+",";
+			//System.out.println(userLine);
+			
+			
 			
 			//Add the line to the user to the DB
 			BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_USERDB);
-			dbConn.BRDBWrite(userLine, this.view.getuEmail(), BRConst.DBUserFile.ROW_OF_USER_EMAIL);
+			dbConn.BRDBWrite(this.model.serilize(), this.view.getuEmail(), BRConst.DBUserFile.ROW_OF_USER_EMAIL);
 			
 			// Registration was successful
 			res = true;
