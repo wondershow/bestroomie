@@ -40,9 +40,10 @@ public class BRRegisterController extends BRAbstractController {
 				if(!this.userExists())
 					this.view.displayView(BRConst.DBMessages.ERROR_USER_ALREADY_EXISTS);
 				//If the user was added successfully, tell them then close the registration window
-				else
+				else{
 					this.view.displayView(BRConst.DBMessages.USER_ADDED);
 					this.view.setVisible(false);
+				}
 			}
 			
 		} else if (e.getActionCommand().equals("Cancel")) {
@@ -73,7 +74,7 @@ public class BRRegisterController extends BRAbstractController {
 		} else {
 			//Print the user email that will be registered and the full line to be added to the DB
 			System.out.println(this.model.getUserEmail() + "  Will be registered");
-			String userLine = this.view.getuName()+":"+this.view.getuEmail()+":"+this.view.getuInputPass()+":";
+			String userLine = this.view.getuName()+":"+this.view.getuEmail()+":"+this.view.getuInputPass()+":"+",";
 			System.out.println(userLine);
 			
 			//Add the line to the user to the DB
