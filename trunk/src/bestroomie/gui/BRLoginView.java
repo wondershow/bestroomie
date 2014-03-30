@@ -41,7 +41,7 @@ public class BRLoginView extends BRAbstractView {
 	private final JButton jbtCancel = new JButton("Cancel");
 	private final JButton jbtRegister = new JButton("Register");
 	//private final JButton jbtAddUser = new JButton("Add User");
-	//private final JButton jbtchangePassword = new JButton("Change Password");
+	private final JButton jbtChangePassword = new JButton("Change Password");
 	
 	private final JLabel jlblStatus = new JLabel(" ");
 	
@@ -160,6 +160,8 @@ public void updateCaptchaImage() {
         p2.add(jbtOk);
         p2.add(jbtCancel);
         p2.add(jbtRegister);
+        p2.add(jbtChangePassword);
+
         
         JPanel p5 = new JPanel(new BorderLayout());
         p5.add(p2, BorderLayout.CENTER);
@@ -283,6 +285,6 @@ public void updateCaptchaImage() {
 		jbtCancel.addActionListener(a);
 		jbtRegister.addActionListener(a);
 //		jbtAddUser.addActionListener(a);
-//		jbtchangePassword.addActionListener(a);
+		jbtChangePassword.addActionListener(a);
 	}
 }

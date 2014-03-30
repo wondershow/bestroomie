@@ -7,6 +7,7 @@ import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRUser;
 import bestroomie.gui.BRLoginView;
 import bestroomie.gui.UserRegisterGUI;
+import bestroomie.gui.ChangePasswordGUI;
 import bestroomie.util.BRConst;
 import bestroomie.util.BRUtil;
 
@@ -54,8 +55,11 @@ public class BRLoginController extends BRAbstractController {
 			
 			
 		} else if (e.getActionCommand().equals("Change Password")) {
-//			if(this.changePass())
-				
+			BRUser m = new BRUser("c","d");
+			ChangePasswordGUI v = new ChangePasswordGUI();
+			BRChangePasswordController c = new BRChangePasswordController(m,v);
+			v.registerListener(c);
+			v.setVisible(true);					
 		}
 	}
 	
