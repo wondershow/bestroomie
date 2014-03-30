@@ -13,6 +13,15 @@ public final class BRConst {
 	public static final int CAPTCHA_IMG_HEIGHT = 30;
 	
 	
+	public static final class GUISettings {
+		
+		public static final int MAIN_GUI_WIDTH = 800;
+		public static final int MAIN_GUI_HEIGH = 500;
+		public static final String MAIN_GUI_TITTLE = "BestRoomie";
+		
+		
+	}
+	
 	public static final class DBMessages {
 		public static final String ERROR_VALIDATION_FAILURE = "The user name and password dont match";
 		public static final String ERROR_REG_FAILURE_USER_EXISTS = "The input email has been existed in the system";
