@@ -21,7 +21,6 @@ import bestroomie.controller.BRAbstractController;
 import bestroomie.controller.BRLoginController;
 import bestroomie.util.BRConst;
 
-
 public class BRLoginView extends BRAbstractView {
 	
 	private final JLabel jlblUsername = new JLabel("Username:");
@@ -40,6 +39,7 @@ public class BRLoginView extends BRAbstractView {
 	
 	private final JButton jbtOk = new JButton("Login");
 	private final JButton jbtCancel = new JButton("Cancel");
+	private final JButton jbtRegister = new JButton("Register");
 	//private final JButton jbtAddUser = new JButton("Add User");
 	//private final JButton jbtchangePassword = new JButton("Change Password");
 	
@@ -159,7 +159,7 @@ public void updateCaptchaImage() {
         JPanel p2 = new JPanel();
         p2.add(jbtOk);
         p2.add(jbtCancel);
-        
+        p2.add(jbtRegister);
         
         JPanel p5 = new JPanel(new BorderLayout());
         p5.add(p2, BorderLayout.CENTER);
@@ -281,6 +281,7 @@ public void updateCaptchaImage() {
 		// TODO Auto-generated method stub
 		jbtOk.addActionListener(a);
 		jbtCancel.addActionListener(a);
+		jbtRegister.addActionListener(a);
 //		jbtAddUser.addActionListener(a);
 //		jbtchangePassword.addActionListener(a);
 	}

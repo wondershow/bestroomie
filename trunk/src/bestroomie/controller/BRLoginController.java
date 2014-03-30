@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRUser;
 import bestroomie.gui.BRLoginView;
+import bestroomie.gui.UserRegisterGUI;
 import bestroomie.util.BRConst;
 import bestroomie.util.BRUtil;
 
@@ -41,7 +42,14 @@ public class BRLoginController extends BRAbstractController {
 		} else if (e.getActionCommand().equals("Cancel")) {
 			this.model.reset();
 			this.view.reset();
-			
+
+		} else if (e.getActionCommand().equals("Register")) {
+			BRUser m = new BRUser("c","d");
+			UserRegisterGUI v = new UserRegisterGUI();
+			BRRegisterController c = new BRRegisterController(m,v);
+			v.registerListener(c);
+			v.setVisible(true);	
+
 		} else if (e.getActionCommand().equals("Add User")) { 
 			
 			

@@ -18,6 +18,11 @@ public final class BRConst {
 		public static final String ERROR_REG_FAILURE_USER_EXISTS = "The input email has been existed in the system";
 		public static final String ERROR_INVALID_EMAIL = "The input email is invalid";
 		public static final String ERROR_WRONG_CAPTCHA = "Please input correct captcha";
+		public static final String ERROR_PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
+		public static final String ERROR_NO_NAME = "Name can not be blank";
+		public static final String ERROR_NO_PASSWORD = "Password can not be blank";
+		public static final String ERROR_USER_ALREADY_EXISTS = "A user with that email already exists";
+		public static final String USER_ADDED = "You were successfully registered!  Welcome!";
 	}
 	
 	public static final class DBFile {
