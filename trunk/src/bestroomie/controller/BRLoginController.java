@@ -8,6 +8,7 @@ import bestroomie.entities.BRUser;
 import bestroomie.gui.BRLoginView;
 import bestroomie.gui.UserRegisterGUI;
 import bestroomie.gui.ChangePasswordGUI;
+import bestroomie.gui.BRMainView;
 import bestroomie.util.BRConst;
 import bestroomie.util.BRUtil;
 
@@ -37,6 +38,14 @@ public class BRLoginController extends BRAbstractController {
 			else{
 				if(!this.validateUser())
 					this.view.displayView(BRConst.DBMessages.ERROR_VALIDATION_FAILURE);
+				else{
+					BRUser m = new BRUser("c","d");
+					BRMainView v = new BRMainView();
+					BRMainViewController c = new BRMainViewController(m,v);
+					v.registerListener(c);
+					v.setVisible(true);	
+				}
+					
 				//Go to MainUI
 			}
 			
