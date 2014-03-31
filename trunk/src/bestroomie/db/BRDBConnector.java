@@ -83,7 +83,6 @@ public class BRDBConnector {
 		
 		
 		try {
-			
 			output = new PrintWriter(new FileWriter(tmpFileFullPath));
 			fr = new FileReader(dbFileFullPath);
 			br = new BufferedReader(fr);
@@ -106,12 +105,8 @@ public class BRDBConnector {
 			
 			if(needToWriteNewLine)
 				output.println(line);
-			
-			
-			
 			output.close();
 			br.close();
-			
 			
 			//to delete the old file and replace it with the swap file
 			File oldFile = new File(dbFileFullPath);

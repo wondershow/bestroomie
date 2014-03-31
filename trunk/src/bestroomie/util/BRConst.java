@@ -24,7 +24,8 @@ public final class BRConst {
 	
 	public static final class DBMessages {
 		public static final String ERROR_VALIDATION_FAILURE = "The user name and password dont match";
-		public static final String ERROR_REG_FAILURE_USER_EXISTS = "The input email has been existed in the system";
+		public static final String ERROR_REG_FAILURE_USER_EXISTS = "The input email already exists in the system";
+		public static final String ERROR_USER_DOES_NOT_EXIST = "The email address does not exist in the system";
 		public static final String ERROR_INVALID_EMAIL = "The input email is invalid";
 		public static final String ERROR_WRONG_CAPTCHA = "Please input correct captcha";
 		public static final String ERROR_PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
@@ -32,6 +33,7 @@ public final class BRConst {
 		public static final String ERROR_NO_PASSWORD = "Password can not be blank";
 		public static final String ERROR_USER_ALREADY_EXISTS = "A user with that email already exists";
 		public static final String USER_ADDED = "You were successfully registered!  Welcome!";
+		public static final String PASSWORD_CHANGED = "Your password was successfully changed";
 	}
 	
 	public static final class DBFile {

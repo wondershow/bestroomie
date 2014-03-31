@@ -51,9 +51,6 @@ public class BRLoginController extends BRAbstractController {
 			v.registerListener(c);
 			v.setVisible(true);	
 
-		} else if (e.getActionCommand().equals("Add User")) { 
-			
-			
 		} else if (e.getActionCommand().equals("Change Password")) {
 			BRUser m = new BRUser("c","d");
 			ChangePasswordGUI v = new ChangePasswordGUI();
@@ -75,10 +72,6 @@ public class BRLoginController extends BRAbstractController {
 	private boolean validateEmail() {
 		return BRUtil.emailValidator(this.view.getuName());
 	}
-	
-//	private boolean changePass() {
-//		
-//	}
 	
 	private boolean validateUser() {
 		boolean res = false;

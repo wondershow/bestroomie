@@ -12,72 +12,20 @@ public class writeDatabase {
 	private static String input;
 	private static boolean firstLine=true;
 	private static String name, email, password, groups;
+	private static String folder = bestroomie.util.BRConst.DBFile.PATH_TO_DB_FOLDER;
+	private static String fieldSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
+	private static String groupSeperator = bestroomie.util.BRConst.DBFile.GROUP_SEPERATOR;
 
-	public static void addUser(String uEmail, String uPassword) {
-
-		 PrintWriter output = null;
-         try {
-        	//Create the output file
-            output = new PrintWriter(new FileWriter("userDB.temp"));
-            
-            //Open the input file
-            Scanner fileinput = null;
-              File inFile = new File("userDB");
-              try  {
-                fileinput = new Scanner(inFile);
-                //Loop through the entire file, reading it line by line
-                while(fileinput.hasNext()) {
-                	input = fileinput.nextLine();
-                	//Skip the first line
-                	if (firstLine){
-                		firstLine=false;
-                        output.println(input);
-                		continue;
-                	}
-                	//Output every line in the current database to the temp database
-                	output.println(input);
-                }
-                
-                //Add the given email and password to the database
-                output.println("N/A" + "\t" + uEmail + "\t" + uPassword + "\t" + "N/A" + "\t");
-                
-                fileinput.close();
-                output.close(); 
-                
-                // Once everything is complete, delete old file..
-                File oldFile = new File("userDB");
-                oldFile.delete();
-
-                // And rename tmp file's name to old file name
-                File newFile = new File("userDB.temp");
-                newFile.renameTo(oldFile);
-                
-              }catch(FileNotFoundException e) {
-                System.out.println(e);
-                System.exit(1);
-              }
-              finally {
-                  fileinput.close();
-              }
-         }catch(IOException e) {
-             System.out.println(e);
-             System.exit(1);
-         }
-         finally {
-            output.close(); 
-         } 
-	}
-	
 	public static void changePassword(String uEmail, String uPassword) {
 
 		PrintWriter output = null;
         try {
        	//Create the output file
-           output = new PrintWriter(new FileWriter("userDB.temp"));
+           output = new PrintWriter(new FileWriter(folder + "UserDB.temp"));
            
            //Open the input file
            Scanner fileinput = null;
-             File inFile = new File("userDB");
+             File inFile = new File(folder + "UserDB");
              try  {
                fileinput = new Scanner(inFile);
                //Loop through the entire file, reading it line by line
@@ -108,11 +56,11 @@ public class writeDatabase {
                	
                	//if the given email address equals the database record, add the group given to the user's list of groups
                	if(uEmail.equals(email)){
-               		groups=groups+","+uPassword;
-                    output.println(name + '\t' + email + '\t' + password + '\t' + groups + "\t");
+               		password=uPassword;
+                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups + fieldSeperator);
                	}
                	else{
-                    output.println(name + '\t' + email + '\t' + password + '\t' + groups + "\t");
+                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups + fieldSeperator);
                	}
 
                }
@@ -121,11 +69,11 @@ public class writeDatabase {
                output.close(); 
                
                // Once everything is complete, delete old file..
-               File oldFile = new File("userDB");
+               File oldFile = new File(folder + "UserDB");
                oldFile.delete();
 
                // Rename the new file to the old file's name
-               File newFile = new File("userDB.temp");
+               File newFile = new File(folder + "UserDB.temp");
                newFile.renameTo(oldFile);
                
              }catch(FileNotFoundException e) {
@@ -149,10 +97,10 @@ public class writeDatabase {
 	public static String getItem (String line, int itemNumber){
 		String tempItem = line;
 		for (int i = (itemNumber-1); i>0; i--){
-			tempItem = tempItem.substring(tempItem.indexOf('\t')+1);
+			tempItem = tempItem.substring(tempItem.indexOf(fieldSeperator)+1);
 			System.out.println("temp: " + tempItem);
 		}
-		tempItem = tempItem.substring(0, tempItem.indexOf('\t')).trim();
+		tempItem = tempItem.substring(0, tempItem.indexOf(fieldSeperator)).trim();
 		return tempItem;
 	}
 	
