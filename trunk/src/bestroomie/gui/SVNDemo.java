@@ -7,7 +7,7 @@ package bestroomie.gui;
 public class SVNDemo {
 	
 	private String userAge() {
-		return "name1111";
+		return "max";
 	}
 	
 	public static void main(String[] args) {
