@@ -1,1 +1,4 @@
-group	users
+group:email
+group1:user@here.com,user2@gmail.com,user3@yahoo.com,lei@here.com,test@here.com
+group2:user2@gmail.com
+group3:user3@yahoo.com
