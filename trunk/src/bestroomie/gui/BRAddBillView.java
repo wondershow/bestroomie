@@ -23,47 +23,45 @@ import bestroomie.util.BRConst;
 
 public class BRAddBillView extends BRAbstractView {
 	
-	private final JLabel jlblUsername = new JLabel("Date:");
-	private final JLabel jlblPassword = new JLabel("Amount:");
+	private final JLabel jlblDate = new JLabel("Date:");
+	private final JLabel jlblAmount = new JLabel("Amount:");
 	
-	private final JLabel jlblCaptcha = new JLabel("Payee:");
+	private final JLabel jlblPayee = new JLabel("Payee:");
 	private JLabel captchLbl = null;
 	JPanel captchaImgPnl;
 	private JPanel motherPanel = null;
 	
-	private final JTextField jtfUsername = new JTextField(15);
-	
+	private final JTextField jtfDate = new JTextField(15);
+	private final JTextField jtfAmount = new JTextField(15);
 	private final JTextField jtfCaptchaTxt = new JTextField(15);
 	
-	private final JPasswordField jpfPassword = new JPasswordField();
-	
-	private final JButton jbtOk = new JButton("Login");
+	private final JButton jbtOk = new JButton("Add");
 	private final JButton jbtCancel = new JButton("Cancel");
-	private final JButton jbtRegister = new JButton("Register");
+	//private final JButton jbtRegister = new JButton("Register");
 	//private final JButton jbtAddUser = new JButton("Add User");
-	private final JButton jbtChangePassword = new JButton("Change Password");
+	//private final JButton jbtChangePassword = new JButton("Change Password");
 	
 	private final JLabel jlblStatus = new JLabel(" ");
 	
 	
 	public void reset() {
-		this.jtfUsername.setText("");
-		this.jpfPassword.setText("");
+		this.jtfDate.setText("");
+		this.jtfAmount.setText("");
 		this.jtfCaptchaTxt.setText("");
 	}
 	
 	//private String uName = "";
 	
 	public String getuName() {
-		return jtfUsername.getText();
+		return jtfDate.getText();
 	}
 
 	public void setuName(String uName) {
-		this.jtfUsername.setText(uName);
+		this.jtfDate.setText(uName);
 	}
 
 	public String getuInputPass() {
-		return jpfPassword.getText();
+		return jtfAmount.getText();
 	}
 
 	public void setuInputPass(String uInputPass) {
@@ -116,22 +114,22 @@ public void updateCaptchaImage() {
 		
 		/*
 		JPanel p3 = new JPanel(new GridLayout(2, 1));
-        p3.add(jlblUsername);
-        p3.add(jlblPassword);
+        p3.add(jlblDate);
+        p3.add(jlblAmount);
         
         JPanel p4 = new JPanel(new GridLayout(2, 1));
-        p4.add(jtfUsername);
-        p4.add(jpfPassword); */
+        p4.add(jtfDate);
+        p4.add(jtfAmount); */
 		
 		JPanel p3 = new JPanel(new GridLayout(1, 2));
-		jlblUsername.setHorizontalAlignment(SwingConstants.CENTER);
-        p3.add(jlblUsername);
-        p3.add(jtfUsername);
+		jlblDate.setHorizontalAlignment(SwingConstants.CENTER);
+        p3.add(jlblDate);
+        p3.add(jtfDate);
         
         JPanel p4 = new JPanel(new GridLayout(1, 2));
-        jlblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-        p4.add(jlblPassword);
-        p4.add(jpfPassword);
+        jlblAmount.setHorizontalAlignment(SwingConstants.CENTER);
+        p4.add(jlblAmount);
+        p4.add(jtfAmount);
         
         
        
@@ -140,8 +138,8 @@ public void updateCaptchaImage() {
 		
 		jtfCaptchaTxt.setText("");
 		JPanel captChaTxtPnl = new JPanel(new GridLayout(1, 2));
-		jlblCaptcha.setHorizontalAlignment(SwingConstants.CENTER);
-		captChaTxtPnl.add(jlblCaptcha);
+		jlblPayee.setHorizontalAlignment(SwingConstants.CENTER);
+		captChaTxtPnl.add(jlblPayee);
 		captChaTxtPnl.add(jtfCaptchaTxt);
 		
 
@@ -155,8 +153,8 @@ public void updateCaptchaImage() {
         JPanel p2 = new JPanel();
         p2.add(jbtOk);
         p2.add(jbtCancel);
-        p2.add(jbtRegister);
-        p2.add(jbtChangePassword);
+        //p2.add(jbtRegister);
+        //p2.add(jbtChangePassword);
 
         
         JPanel p5 = new JPanel(new BorderLayout());
@@ -175,13 +173,13 @@ public void updateCaptchaImage() {
 		
 		/**
 		JPanel usrRowPnl = new JPanel(new GridLayout(1, 2));
-		usrRowPnl.add(jlblUsername);
-		jtfUsername.setText("username");
-		usrRowPnl.add(jtfUsername);
+		usrRowPnl.add(jlblDate);
+		jtfDate.setText("username");
+		usrRowPnl.add(jtfDate);
 		
 		JPanel emailRowPnl = new JPanel(new GridLayout(1, 2));
-		emailRowPnl.add(jlblPassword);
-		emailRowPnl.add(jpfPassword);
+		emailRowPnl.add(jlblAmount);
+		emailRowPnl.add(jtfAmount);
 		
 		
 		
@@ -202,19 +200,19 @@ public void updateCaptchaImage() {
 		
 		jtfCaptchaTxt.setText("capthca");
 		JPanel captChaTxtPnl = new JPanel(new GridLayout(1, 2));
-		captChaTxtPnl.add(jlblCaptcha);
+		captChaTxtPnl.add(jlblPayee);
 		captChaTxtPnl.add(jtfCaptchaTxt);
 		
 		
 		JPanel p3 = new JPanel(new GridLayout(4, 1));
-        p3.add(jlblUsername);
-        p3.add(jlblPassword);
+        p3.add(jlblDate);
+        p3.add(jlblAmount);
         p3.add(jlblEmpty);
-        p3.add(jlblCaptcha);
+        p3.add(jlblPayee);
 
         JPanel p4 = new JPanel(new GridLayout(4, 1));
-        p4.add(jtfUsername);
-        p4.add(jpfPassword);
+        p4.add(jtfDate);
+        p4.add(jtfAmount);
         p4.add(captchLbl);
         p4.add(jtfCaptchaTxt);
         
@@ -279,8 +277,8 @@ public void updateCaptchaImage() {
 		// TODO Auto-generated method stub
 		jbtOk.addActionListener(a);
 		jbtCancel.addActionListener(a);
-		jbtRegister.addActionListener(a);
+		//jbtRegister.addActionListener(a);
 //		jbtAddUser.addActionListener(a);
-		jbtChangePassword.addActionListener(a);
+		//jbtChangePassword.addActionListener(a);
 	}
 }
