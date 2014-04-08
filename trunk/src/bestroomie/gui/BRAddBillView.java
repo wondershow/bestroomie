@@ -3,6 +3,8 @@ package bestroomie.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import bestroomie.controller.BRAbstractController;
 import bestroomie.controller.BRLoginController;
+import bestroomie.test.DatePicker;
 import bestroomie.util.BRConst;
 
 public class BRAddBillView extends BRAbstractView {
@@ -32,8 +35,9 @@ public class BRAddBillView extends BRAbstractView {
 	private JPanel motherPanel = null;
 	
 	private final JTextField jtfDate = new JTextField(15);
+	
 	private final JTextField jtfAmount = new JTextField(15);
-	private final JTextField jtfCaptchaTxt = new JTextField(15);
+	private final JTextField jtfPayeeTxt = new JTextField(15);
 	
 	private final JButton jbtOk = new JButton("Add");
 	private final JButton jbtCancel = new JButton("Cancel");
@@ -43,11 +47,12 @@ public class BRAddBillView extends BRAbstractView {
 	
 	private final JLabel jlblStatus = new JLabel(" ");
 	
+	private final JPanel p1 = new JPanel(new GridLayout(4, 1));
 	
 	public void reset() {
 		this.jtfDate.setText("");
 		this.jtfAmount.setText("");
-		this.jtfCaptchaTxt.setText("");
+		this.jtfPayeeTxt.setText("");
 	}
 	
 	//private String uName = "";
@@ -69,7 +74,7 @@ public class BRAddBillView extends BRAbstractView {
 	}
 	
 	public String getCaptchaText() {
-		return jtfCaptchaTxt.getText().trim();
+		return jtfPayeeTxt.getText().trim();
 	}
 	
 	public void setupCaptchaImage() {
@@ -136,15 +141,15 @@ public void updateCaptchaImage() {
 		
 		
 		
-		jtfCaptchaTxt.setText("");
+		jtfPayeeTxt.setText("");
 		JPanel captChaTxtPnl = new JPanel(new GridLayout(1, 2));
 		jlblPayee.setHorizontalAlignment(SwingConstants.CENTER);
 		captChaTxtPnl.add(jlblPayee);
-		captChaTxtPnl.add(jtfCaptchaTxt);
+		captChaTxtPnl.add(jtfPayeeTxt);
 		
 
         
-        JPanel p1 = new JPanel(new GridLayout(4, 1));
+     
         p1.add(p3);
         p1.add(p4);
         
@@ -198,10 +203,10 @@ public void updateCaptchaImage() {
 		captchaImgPnl.add(jlblEmpty);
 		captchaImgPnl.add(captchLbl);
 		
-		jtfCaptchaTxt.setText("capthca");
+		jtfPayeeTxt.setText("capthca");
 		JPanel captChaTxtPnl = new JPanel(new GridLayout(1, 2));
 		captChaTxtPnl.add(jlblPayee);
-		captChaTxtPnl.add(jtfCaptchaTxt);
+		captChaTxtPnl.add(jtfPayeeTxt);
 		
 		
 		JPanel p3 = new JPanel(new GridLayout(4, 1));
@@ -214,7 +219,7 @@ public void updateCaptchaImage() {
         p4.add(jtfDate);
         p4.add(jtfAmount);
         p4.add(captchLbl);
-        p4.add(jtfCaptchaTxt);
+        p4.add(jtfPayeeTxt);
         
 
         JPanel p1 = new JPanel();
@@ -268,6 +273,11 @@ public void updateCaptchaImage() {
 		JOptionPane.showMessageDialog(null, msg);
 	}
 	
+	public void setPayeeText(String s) {
+		this.jtfPayeeTxt.setText(s);
+	}
+	
+	
 	public void displayView() {
 		this.setVisible(true);
 	}
@@ -277,6 +287,11 @@ public void updateCaptchaImage() {
 		// TODO Auto-generated method stub
 		jbtOk.addActionListener(a);
 		jbtCancel.addActionListener(a);
+		jtfDate.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent ae) {
+		    	  jtfDate.setText(new DatePicker(p1).setPickedDate());
+		       }
+		});
 		//jbtRegister.addActionListener(a);
 //		jbtAddUser.addActionListener(a);
 		//jbtChangePassword.addActionListener(a);
