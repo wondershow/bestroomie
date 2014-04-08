@@ -1,6 +1,9 @@
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRBill;
@@ -43,7 +46,15 @@ public class BRAddBillController extends BRAbstractController {
 	public static void main(String args[]) {
 		BRAddBillView v = new BRAddBillView();
 		BRBill m = new BRBill();
-		BRAddBillController c = new BRAddBillController(m,v,"a@here.com","grp1");
+		BRAddBillController c = new BRAddBillController(m,v,"a@here.com","group1");
+		c.gModel.load();
+		ArrayList<String> usrList = c.gModel.getGroupMember();
+		
+		String oneUser = "";
+		for (String s : usrList)   
+			oneUser = s;
+		//	System.out.println(s);
+		v.setPayeeText(oneUser);
 		v.setVisible(true);
 	}
 
