@@ -69,5 +69,20 @@ public final class BRConst {
 		public static final String ROW_3_FIELD_NAME = "Group";
 	}
 	
+	public static final class DBGroupFile {
+		private DBGroupFile() {}
+		public static final int TOTAL_NUM_OF_COLUMNS = 2;
+		
+		//first row, user name(row number is 0)
+		public static final int COLUMN_OF_GROUP_ID = 0;
+		public static final String COLUMN_0_FILED_NAME = "GroupId";
+		
+		//email row
+		public static final int COLUMN_OF_GROUP_MEMBER = 1;
+		public static final String COLUMN_1_FIELD_NAME = "Member";
+		
+		
+	}
+	
 	
 }
