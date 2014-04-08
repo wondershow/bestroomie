@@ -18,7 +18,7 @@ public class CalendarTest {
     JLabel label = new JLabel("Selected Date:");
     final JTextField text = new JTextField(20);
     JButton b = new JButton("popup");
-    JPanel p = new JPanel();
+    final JPanel p = new JPanel();
     p.add(label);
     p.add(text);
     p.add(b);
@@ -28,7 +28,7 @@ public class CalendarTest {
     f.setVisible(true);
     b.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-        text.setText(new DatePicker(f).setPickedDate());
+        text.setText(new DatePicker(p).setPickedDate());
       }
     });
   }

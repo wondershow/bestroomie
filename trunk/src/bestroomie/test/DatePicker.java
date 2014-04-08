@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
  
-class DatePicker {
+public class DatePicker {
   int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
   int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
   JLabel l = new JLabel("", JLabel.CENTER);
@@ -16,7 +16,7 @@ class DatePicker {
   JDialog d;
   JButton[] button = new JButton[49];
  
-  public DatePicker(JFrame parent) {
+  public DatePicker(JPanel parent) {
     d = new JDialog();
     d.setModal(true);
     String[] header = { "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
