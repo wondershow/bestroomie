@@ -1,5 +1,5 @@
 package bestroomie.db;
-//test
+//testagain
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +15,11 @@ public class writeDatabase {
 	private static String folder = bestroomie.util.BRConst.DBFile.PATH_TO_DB_FOLDER;
 	private static String fieldSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
 	private static String groupSeperator = bestroomie.util.BRConst.DBFile.GROUP_SEPERATOR;
+	private static int nameLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_NAME+1;
+	private static int emailLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_EMAIL+1;
+	private static int passwordLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_PASS+1;
+	private static int groupsLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_GROUP+1;
+
 
 	public static void changePassword(String uEmail, String uPassword) {
 
@@ -39,7 +44,7 @@ public class writeDatabase {
                	}
                	         	
                	//Get name
-               	String name = getItem(input, 1);
+               	name = getItem(input, 1);
 //               	System.out.println("First is: " + name);
                
                	//Get email
@@ -47,20 +52,20 @@ public class writeDatabase {
 //               	System.out.println("Second is: " + email);
                	
                	//Get password
-               	String password = getItem(input, 3);
+               	password = getItem(input, 3);
 //               	System.out.println("Third is: " + password);
 
                	//Get groups
-               	String groups = getItem(input, 4);
+               	groups = getItem(input, 4);
 //               	System.out.println("Fourth is: " + groups);
                	
                	//if the given email address equals the database record, add the group given to the user's list of groups
                	if(uEmail.equals(email)){
                		password=uPassword;
-                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups + fieldSeperator);
+                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups);
                	}
                	else{
-                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups + fieldSeperator);
+                    output.println(name + fieldSeperator + email + fieldSeperator + password + fieldSeperator + groups);
                	}
 
                }
@@ -100,7 +105,12 @@ public class writeDatabase {
 			tempItem = tempItem.substring(tempItem.indexOf(fieldSeperator)+1);
 			System.out.println("temp: " + tempItem);
 		}
-		tempItem = tempItem.substring(0, tempItem.indexOf(fieldSeperator)).trim();
+		try{
+			tempItem = tempItem.substring(0, tempItem.indexOf(fieldSeperator)).trim();
+			System.out.println("temp: " + tempItem);
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("catch temp: " + tempItem);
+		}
 		return tempItem;
 	}
 	

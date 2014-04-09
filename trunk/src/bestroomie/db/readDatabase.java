@@ -10,7 +10,11 @@ public class readDatabase {
 	private static boolean firstLine=true;
 	//Variable to identify if the user is valid
 	private static boolean valid=false;
-	private static String email, password;
+	private static String input;
+	private static String name, email, password, groups;
+	private static String folder = bestroomie.util.BRConst.DBFile.PATH_TO_DB_FOLDER;
+	private static String fieldSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
+	private static String groupSeperator = bestroomie.util.BRConst.DBFile.GROUP_SEPERATOR;
 	
 	public static boolean validateUser(String userName, String password) {
 	
@@ -65,11 +69,16 @@ public class readDatabase {
 	//The string must have a tab between each column and a tab at the end
 	public static String getItem (String line, int itemNumber){
 		String tempItem = line;
-		
 		for (int i = (itemNumber-1); i>0; i--){
-			tempItem = tempItem.substring(tempItem.indexOf('\t')+1).trim();
+			tempItem = tempItem.substring(tempItem.indexOf(fieldSeperator)+1);
+			System.out.println("temp: " + tempItem);
 		}
-		tempItem = tempItem.substring(0, tempItem.indexOf('\t')).trim();
+		try{
+			tempItem = tempItem.substring(0, tempItem.indexOf(fieldSeperator)).trim();
+			System.out.println("temp: " + tempItem);
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("catch temp: " + tempItem);
+		}
 		return tempItem;
 	}
 
