@@ -15,8 +15,32 @@ public class BRMainGui extends BRAbstractView{
 	
 	private JPanel leftPanel;
 	private JPanel bodyPanel;
+	private BRHeadPanel headPanel;
+	private BRGroupPanel groupPanel;
+	private BRGrpmemPanel groupMemPanel;
+	private BRBillTab billTab;
+	private BRChoreTab choreTab;
 	
 	
+	public BRHeadPanel getHeadPanel(){
+		return this.headPanel;
+	}
+	
+	public BRGroupPanel getGroupPanel(){
+		return this.groupPanel;
+	}
+	
+	public BRGrpmemPanel getGrpMemPanel(){
+		return this.groupMemPanel;
+	}
+	
+	public BRBillTab getBillTab(){
+		return this.billTab;
+	}
+	
+	public BRChoreTab getChoreTab() {
+		return this.choreTab;
+	}
 	
 	public BRMainGui() {
 		
@@ -25,16 +49,16 @@ public class BRMainGui extends BRAbstractView{
 		int height = BRMainPanel.mainFrameHeight - BRMainPanel.headPanelHeight;
 		
 		leftPanel.setPreferredSize(new Dimension(wid,height));
-		BRGroupPanel grpPanel = new BRGroupPanel();
-		grpPanel.setBackground(new Color(255,0,0));
-		BRGrpmemPanel grpMemPnl = new BRGrpmemPanel();
-		grpMemPnl.setBackground(new Color(0,255,0));
+		groupPanel = new BRGroupPanel();
+		groupPanel.setBackground(new Color(255,0,0));
+		groupMemPanel = new BRGrpmemPanel();
+		groupMemPanel.setBackground(new Color(0,255,0));
 		
-		leftPanel.add(grpPanel,BorderLayout.CENTER);
-		leftPanel.add(grpMemPnl,BorderLayout.SOUTH);
+		leftPanel.add(groupPanel,BorderLayout.CENTER);
+		leftPanel.add(groupMemPanel,BorderLayout.SOUTH);
 		
-		BRChoreTab choreTab = new BRChoreTab();
-		BRBillTab billTab = new BRBillTab();
+		choreTab = new BRChoreTab();
+		billTab = new BRBillTab();
 		JTabbedPane jp = new JTabbedPane();
     	jp.addTab("Chore", choreTab);
     	jp.addTab("Bill", billTab);
@@ -44,7 +68,7 @@ public class BRMainGui extends BRAbstractView{
     	bodyPanel.add(jp,BorderLayout.CENTER);
     	
     	
-    	BRHeadPanel headPanel = new BRHeadPanel();
+    	headPanel = new BRHeadPanel();
     	
     	this.add(headPanel,BorderLayout.NORTH);
     	this.add(bodyPanel,BorderLayout.CENTER);
