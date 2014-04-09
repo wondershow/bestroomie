@@ -47,6 +47,9 @@ public class BRLoginController extends BRAbstractController {
 				}
 					
 				//Go to MainUI
+				this.view.dispose();
+				BRMainGuiController mainGui = new BRMainGuiController(this.model);
+				mainGui.refreshUI();
 			}
 			
 		} else if (e.getActionCommand().equals("Cancel")) {
