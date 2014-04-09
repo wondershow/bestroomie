@@ -17,6 +17,10 @@ public class BRGroup extends BRAbstractEntity{
 		
 	}
 	
+	public String getGroupId() {
+		return this.gpId;
+	}
+	
 	
 	public void setGroupId(String id) {
 		this.gpId = id;

@@ -116,10 +116,44 @@ public class BRUser extends BRAbstractEntity{
 	public void setUserInputPass(String userInputPass) {
 		this.userInputPass = userInputPass;
 	}
+	
+	/**
+	 * This function returns how many members in a given group
+	 * @param grpId the group id
+	 * **/
+	public int getGroupSize(String grpId) {
+		int res = 0;
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_GROUPDB);
+		String line = dbConn.BRDBRead(grpId, BRConst.DBGroupFile.COLUMN_OF_GROUP_ID);
+		if (line == null) // not matching record found
+			res = -1;
+		else {
+			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+			String tmpStr = strArr[BRConst.DBGroupFile.COLUMN_OF_GROUP_MEMBER];
+			res = tmpStr.split(BRConst.DBFile.GROUP_SEPERATOR).length;
+		}
+		return res;
+	}
+	
+	
+	/**
+	 * To return the first group that this user belongs to
+	 * **/
+	public String getFirstGrpId(){
+		String tmp[] = this.userGroup.split(BRConst.DBFile.GROUP_SEPERATOR);
+		if(tmp != null && tmp.length>=1)
+			return tmp[0];
+		else
+			return null;
+		
+	}
+	
 		
 	public static void main(String args) {
 		
 	}
+	
+	
 
 	//to reset all the fields
 	public void reset() {
