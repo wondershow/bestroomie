@@ -1,1 +1,2 @@
-group	title	date	assignment	amount	approval	paid
+transactionID:group:title:date:assignment:amount:approval:paid
+a@b.com201404132.31pm:group1:Beer:20140413:user1,user2:23.30,45.20:yes,yes:no,no
