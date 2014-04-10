@@ -31,5 +31,11 @@ public class BRChoreTab extends BRMainPanel {
 		frame.setLocationRelativeTo(null);
 	}
 
+	@Override
+	public void registerListener(BRAbstractController a) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

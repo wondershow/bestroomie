@@ -6,12 +6,14 @@ Class Description:
 package bestroomie.gui;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
 import bestroomie.controller.BRAbstractController;
 
-public class BRMainGui extends BRAbstractView{
+public class BRMainGui extends BRAbstractView implements MouseListener{
 	
 	private JPanel leftPanel;
 	private JPanel bodyPanel;
@@ -40,6 +42,10 @@ public class BRMainGui extends BRAbstractView{
 	
 	public BRChoreTab getChoreTab() {
 		return this.choreTab;
+	}
+	
+	public JPanel getLeftPanel() {
+		return this.leftPanel;
 	}
 	
 	public BRMainGui() {
@@ -96,6 +102,47 @@ public class BRMainGui extends BRAbstractView{
 	@Override
 	public void registerListener(BRAbstractController a) {
 		// TODO Auto-generated method stub
+		for (Component c : this.getComponents())
+		{
+		      if (c instanceof JButton)
+		      {
+		    	   System.out.println("I am reg listener in the maingui");
+		           JButton tmp = (JButton)c;
+		           tmp.addActionListener(a);
+		      }
+		 }
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
 		
+		System.out.println("mouseClicked");
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseEntered");
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseExited");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("mousePressed");
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseReleased");
 	}
 }

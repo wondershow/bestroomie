@@ -6,6 +6,9 @@ Class Description:
 package bestroomie.gui;
 
 import javax.swing.*;
+
+import bestroomie.controller.BRAbstractController;
+
 import java.awt.*;
 
 
@@ -30,8 +33,6 @@ public class BRHeadPanel extends BRMainPanel {
 		this.welcomeLbl.setText(tmpStr);
 	}
 	
-	
-	
 	public BRHeadPanel () {
 		this.setPreferredSize(new Dimension(this.headPanelWidth,this.headPanelHeight));
 		
@@ -54,5 +55,11 @@ public class BRHeadPanel extends BRMainPanel {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+	}
+
+	@Override
+	public void registerListener(BRAbstractController a) {
+		// TODO Auto-generated method stub
+		settingsBtn.addActionListener(a);
 	}
 }

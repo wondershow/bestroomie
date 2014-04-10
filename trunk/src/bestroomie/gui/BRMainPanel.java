@@ -7,12 +7,14 @@ package bestroomie.gui;
 
 import javax.swing.JPanel;
 
+import bestroomie.controller.BRAbstractController;
+
 
 /**
  * 
  * 
  * */
-public class BRMainPanel extends JPanel	{
+public abstract class BRMainPanel extends JPanel	{
 	
 	public static final int mainFrameWidth = 500;
 	public static final int mainFrameHeight = 500;
@@ -25,5 +27,7 @@ public class BRMainPanel extends JPanel	{
 	public static final int tabWidth = 350;
 	public static final int tabHeight = 350;
 	//
+	
+	public abstract void registerListener(BRAbstractController a);
 	
 }

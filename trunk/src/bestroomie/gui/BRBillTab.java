@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import bestroomie.controller.BRAbstractController;
+
 public class BRBillTab extends BRMainPanel {
 
 	public BRBillTab() {
@@ -27,6 +29,12 @@ public class BRBillTab extends BRMainPanel {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+	}
+
+	@Override
+	public void registerListener(BRAbstractController a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

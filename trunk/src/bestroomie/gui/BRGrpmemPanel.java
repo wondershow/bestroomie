@@ -9,6 +9,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import bestroomie.controller.BRAbstractController;
+
 public class BRGrpmemPanel extends BRMainPanel {
 
 	public BRGrpmemPanel() {
@@ -24,6 +26,12 @@ public class BRGrpmemPanel extends BRMainPanel {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+		
+	}
+
+	@Override
+	public void registerListener(BRAbstractController a) {
+		// TODO Auto-generated method stub
 		
 	}
 }
