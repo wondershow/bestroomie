@@ -16,7 +16,7 @@ public class BRDBConnector {
 		
 	public BRDBConnector(String fileName) {
 		this.fldSeperator = BRConst.DBFile.FIELD_SEPERATOR;
-		System.out.println("The file name is " + fileName);
+		//System.out.println("The file name is " + fileName);
 		this.dbFileName = fileName;
 	}
 
@@ -44,7 +44,7 @@ public class BRDBConnector {
 				strInputLine = strInputLine.trim();
 				if(strInputLine.equals("")) continue; //handles empty lines
 				fields = strInputLine.split(this.fldSeperator);
-				System.out.println("Lines is " + strInputLine + ", match id is " + id + ", that field is " + fields[fieldCount]);
+				//System.out.println("Lines is " + strInputLine + ", match id is " + id + ", that field is " + fields[fieldCount]);
 				//find the matching line
 				if(fields[fieldCount].equals(id)) {
 					res = strInputLine;
@@ -130,7 +130,7 @@ public class BRDBConnector {
 		boolean res = test.BRDBWrite(testLine, "lei@here.com", 1);
 		
 		String res1 = test.BRDBRead("lei@here.com", 1);
-		System.out.println(res1);
+		//System.out.println(res1);
 	}
 	
 }
