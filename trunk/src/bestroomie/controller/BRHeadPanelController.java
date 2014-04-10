@@ -7,6 +7,8 @@ package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.JFrame;
+
 import bestroomie.entities.*;
 import bestroomie.gui.*;
 import bestroomie.util.BRConst;
@@ -26,13 +28,14 @@ public class BRHeadPanelController extends BRAbstractController{
 		this.model = u;
 		this.view = b;
 		this.mainController = c;
-		this.setUpView();
+		this.refreshUI();
 	}
-
-	/***
-	 * To setup the view
+	
+	/**
+	 * TO set up all the gui parts, extracting data
+	 * from model according to references. 
 	 * **/
-	public void setUpView() {
+	public void refreshUI() {
 		String grpId = mainController.getSelectedGrp().getGroupId();
 		String userName = this.model.getUserName();
 		if(userName.trim()!="")
@@ -41,14 +44,15 @@ public class BRHeadPanelController extends BRAbstractController{
 			this.view.setWelcomeLbl("NoName");
 		
 		int numInGrp = this.model.getGroupSize(grpId);
-		
 		this.view.setGrpStatsLbl(numInGrp, grpId);
 	}
+
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("HeadPanelController is responding " + e.getActionCommand());
 	}
 
 	@Override
@@ -56,5 +60,20 @@ public class BRHeadPanelController extends BRAbstractController{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public static void main(String args[]) {
+		BRUser u = new BRUser();
+		u.setUserEmail("lei@here.com");
+		u.load();
+		BRHeadPanel p = new BRHeadPanel();
+		BRMainGuiController m  = new BRMainGuiController(u);
+		BRHeadPanelController c = new BRHeadPanelController(u,p,m);
+		p.registerListener(c);
+		
+		JFrame frame = new JFrame();
+		frame.add(p);
+		frame.pack();
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+	}
 }

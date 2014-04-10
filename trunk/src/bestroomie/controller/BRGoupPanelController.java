@@ -32,27 +32,29 @@ public class BRGoupPanelController extends BRAbstractController {
 	}
 
 	
+	
+	public void refreshUI() {
+		String selectedGrp = this.mainController.getSelectedGrp().getGroupId();
+		this.setupGroupLists(selectedGrp);
+		this.view.registerListener(this);
+	}
+	
+	
 	/**
 	 *  To dynamically add grouplist, the selected group will
 	 *  be displayed in a different color 
 	 * **/
 	public void setupGroupLists(String selectedGroup) {
 		String grpNameList[] = this.model.getUserGroup().split(BRConst.DBFile.GROUP_SEPERATOR);
-		int grpNum = grpNameList.length;
-		this.view.setLayout(new GridLayout(grpNum,1));
-		for (int i=0;i<grpNum;i++) {
-			JButton btn = new JButton(grpNameList[i]);
-			if(grpNameList[i].equals(selectedGroup))
-				btn.setBackground(new Color(255,0,0));
-			this.view.add(btn);
-			System.out.println("I am adding the btn #" + i);
-		}
+		this.view.setupGroupLists(grpNameList,selectedGroup);
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		this.setupGroupLists(e.getActionCommand());
+		this.mainController.setSelectedGrp(e.getActionCommand());
+		System.out.println("I am here listening " + e.getActionCommand());
 	}
 
 	@Override
@@ -66,9 +68,10 @@ public class BRGoupPanelController extends BRAbstractController {
 		u.setUserEmail("lei@here.com");
 		u.load();
 		BRGroupPanel p = new BRGroupPanel();
-		BRGoupPanelController c = new BRGoupPanelController(u,p,null);
+		BRMainGuiController mainController = new BRMainGuiController(u);
+		BRGoupPanelController c = new BRGoupPanelController(u,p,mainController);
 		c.setupGroupLists(u.getFirstGrpId());
-		
+		p.registerListener(c);
 		
 		JFrame frame = new JFrame();
 		frame.add(p);
