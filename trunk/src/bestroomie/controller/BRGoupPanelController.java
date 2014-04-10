@@ -54,6 +54,7 @@ public class BRGoupPanelController extends BRAbstractController {
 	public void actionPerformed(ActionEvent e) {
 		this.setupGroupLists(e.getActionCommand());
 		this.mainController.setSelectedGrp(e.getActionCommand());
+		this.mainController.refreshUI();
 		System.out.println("I am here listening " + e.getActionCommand());
 	}
 

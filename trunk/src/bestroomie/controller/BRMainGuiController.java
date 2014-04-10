@@ -55,8 +55,8 @@ public class BRMainGuiController extends BRAbstractController {
 		
 		
 		
-		this.refreshUI();
-//		//
+//		this.refreshUI();
+////		//
 //		this.groupController.setupGroupLists(this.user.getFirstGrpId());
 //		this.mainFrame.getGroupPanel().registerListener(this.groupController);
 //		this.mainFrame.getHeadPanel().registerListener(this.headController);

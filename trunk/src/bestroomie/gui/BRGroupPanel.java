@@ -41,18 +41,17 @@ public class BRGroupPanel extends BRMainPanel {
 	 *  be displayed in a different color 
 	 * **/
 	public void setupGroupLists(String groups[], String selectedGrp) {
-		
 		this.removeAll();
 		this.repaint();
 		
 		
-		System.out.println("Selected group is " + selectedGrp);
+//		System.out.println("Selected group is " + selectedGrp);
 		int grpNum = groups.length;
 		this.setLayout(new GridLayout(grpNum,1));
 		for (int i=0;i<grpNum;i++) {
 			JButton btn = new JButton(groups[i]);
 			if(groups[i].equals(selectedGrp)) {
-				System.out.println("We are adding " + selectedGrp );
+//				System.out.println("We are adding " + selectedGrp );
 				btn.setBackground(new Color(255,0,0));
 			}
 			this.add(btn);
@@ -63,12 +62,12 @@ public class BRGroupPanel extends BRMainPanel {
 	@Override
 	public void registerListener(BRAbstractController a) {
 		// TODO Auto-generated method stub
-		System.out.println("I am here registering");
+//		System.out.println("I am here registering");
 		for (Component c : this.getComponents())
 		{
 		      if (c instanceof JButton)
 		      {
-		    	   System.out.println("I am reg listener in the group panel, the has code of the traget is " + a.toString());
+//		    	   System.out.println("I am reg listener in the group panel, the has code of the traget is " + a.toString());
 		           JButton tmp = (JButton)c;
 		           tmp.addActionListener(a);
 		      }

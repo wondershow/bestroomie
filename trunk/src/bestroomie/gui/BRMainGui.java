@@ -106,7 +106,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		{
 		      if (c instanceof JButton)
 		      {
-		    	   System.out.println("I am reg listener in the maingui");
+//		    	   System.out.println("I am reg listener in the maingui");
 		           JButton tmp = (JButton)c;
 		           tmp.addActionListener(a);
 		      }

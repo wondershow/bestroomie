@@ -44,6 +44,7 @@ public class BRHeadPanelController extends BRAbstractController{
 			this.view.setWelcomeLbl("NoName");
 		
 		int numInGrp = this.model.getGroupSize(grpId);
+		System.out.println("I am setting numInGrp " + numInGrp + ", grpId " + grpId);
 		this.view.setGrpStatsLbl(numInGrp, grpId);
 	}
 
