@@ -1,3 +1,3 @@
-group:chore:date:week:assignment:completion
-group1:dishes:20140101:1:user1:no
-group1:dusting:20140108:2:user2:no
+group:chore:date:assignment:completion
+group1:dishes:20140101:user1:no
+group1:dusting:20140108:user2:no
