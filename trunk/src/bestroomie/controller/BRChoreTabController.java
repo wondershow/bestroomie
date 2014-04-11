@@ -2,14 +2,9 @@ package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
 
-import bestroomie.db.BRDBConnector;
-import bestroomie.entities.BRAbstractEntity;
-import bestroomie.entities.BRChore;
-import bestroomie.entities.BRUser;
-import bestroomie.gui.BRChoreTab;
-import bestroomie.gui.BRGroupPanel;
+import bestroomie.entities.*;
+import bestroomie.gui.*;
 import bestroomie.util.BRConst;
-import bestroomie.util.BRUtil;
 
 public class BRChoreTabController extends BRAbstractController {
 	
@@ -27,12 +22,10 @@ public class BRChoreTabController extends BRAbstractController {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Show Chores")) {
 			System.out.println("Chores!!!");
-
 		}
 		System.out.println("Chores!!!");
 
 	}
-	
 	
 
 	@Override
