@@ -16,16 +16,19 @@ import bestroomie.controller.BRAbstractController;
  * */
 public abstract class BRMainPanel extends JPanel	{
 	
-	public static final int mainFrameWidth = 500;
-	public static final int mainFrameHeight = 500;
-	public static final int headPanelHeight = 80;
-	public static final int headPanelWidth = mainFrameWidth;
-	public static final int groupPanelWidth = 100;
-	public static final int groupPanelHeight = 150;
-	public static final int grpMemberPnlWidth = 100;
+	public static final int mainFrameWidth = 800;
+	public static final int mainFrameHeight = 600;
+	
+	public static final int headPanelHeight = 120;
+	public static final int groupPanelHeight = 200;
 	public static final int grpMemberPnlHeight = 300;
-	public static final int tabWidth = 350;
-	public static final int tabHeight = 350;
+	
+	public static final int headPanelWidth = mainFrameWidth;
+	public static final int groupPanelWidth = 200;
+	public static final int grpMemberPnlWidth = 200;
+	
+	public static final int tabWidth = 450;
+	public static final int tabHeight = 450;
 	//
 	
 	public abstract void registerListener(BRAbstractController a);
