@@ -7,17 +7,25 @@ package bestroomie.gui;
 
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import bestroomie.controller.BRAbstractController;
 
 public class BRChoreTab extends BRMainPanel {
 
+	private final JButton jbtShowChores = new JButton("Show Chores");
+
 	public BRChoreTab() {
 		int wid = BRMainPanel.tabWidth;
 		int height = BRMainPanel.tabHeight;
 		this.setPreferredSize(new Dimension(wid,height));
+		this.add(jbtShowChores);
+
+		
+		
 	}
 
 	public static void main(String[] args) {
@@ -34,7 +42,9 @@ public class BRChoreTab extends BRMainPanel {
 	@Override
 	public void registerListener(BRAbstractController a) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("test");
+		jbtShowChores.addActionListener(a);
+
 	}
 
 	
