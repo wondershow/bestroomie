@@ -33,7 +33,6 @@ public class BRGoupPanelController extends BRAbstractController implements ListS
 		//this.setupGroupLists(grpList, selectedGroup);
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	
 	public void refreshUI() {
