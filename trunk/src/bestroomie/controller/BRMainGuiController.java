@@ -11,9 +11,11 @@ public class BRMainGuiController extends BRAbstractController {
 
 	private BRUser user;
 	private BRGroup grp;
+	private bestroomie.entities.BRChore chore;
 	private BRMainGui mainFrame;
 	private	BRHeadPanelController headController;
 	private BRGoupPanelController groupController;
+	private BRChoreTabController choreController;
 	private BRGroupPanel userPanel;
 	
 	public void refreshUI() {
@@ -23,6 +25,7 @@ public class BRMainGuiController extends BRAbstractController {
 		this.mainFrame.setVisible(true);
 		this.headController.refreshUI();
 		this.groupController.refreshUI();
+		
 	}
 
 	/**
@@ -52,7 +55,7 @@ public class BRMainGuiController extends BRAbstractController {
 		//Initialize all the subcontrollers
 		this.headController = new BRHeadPanelController(this.user,this.mainFrame.getHeadPanel(),this);
 		this.groupController = new BRGoupPanelController(this.user,this.mainFrame.getGroupPanel(),this);
-		
+		this.choreController = new BRChoreTabController(this.chore,this.mainFrame.getChoreTab(),this);
 		
 		
 //		this.refreshUI();
