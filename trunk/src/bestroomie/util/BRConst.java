@@ -80,9 +80,17 @@ public final class BRConst {
 		//email row
 		public static final int COLUMN_OF_GROUP_MEMBER = 1;
 		public static final String COLUMN_1_FIELD_NAME = "Member";
-		
-		
 	}
 	
+	public static final class DBChoreFile {
+		private DBChoreFile() {}
+		public static final int TOTAL_NUM_OF_COLUMNS = 5;
+		
+		public static final int COLUMN_OF_GROUP = 0;
+		public static final int COLUMN_OF_DESCRIPTION = 1;
+		public static final int COLUMN_OF_DATE = 2;
+		public static final int COLUMN_OF_ASSIGNMENT = 3;
+		public static final int COLUMN_OF_COMPLETION = 4;
+	}
 	
 }
