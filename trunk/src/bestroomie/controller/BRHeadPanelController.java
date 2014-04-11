@@ -37,6 +37,7 @@ public class BRHeadPanelController extends BRAbstractController{
 	 * **/
 	public void refreshUI() {
 		String grpId = mainController.getSelectedGrp().getGroupId();
+		System.out.println("The grop id in the maincontroller is " + grpId);
 		String userName = this.model.getUserName();
 		if(userName.trim()!="")
 			this.view.setWelcomeLbl(this.model.getUserName());

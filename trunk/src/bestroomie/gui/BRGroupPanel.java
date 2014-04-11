@@ -13,12 +13,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import bestroomie.controller.*;
 import bestroomie.util.BRConst;
 
 public class BRGroupPanel extends BRMainPanel {
 	
+	JList<String> gNameList;
+	private BRGoupPanelController controller;
 	
 	public BRGroupPanel () {
 		this.setPreferredSize(new Dimension(BRMainPanel.groupPanelWidth,BRMainPanel.groupPanelHeight));
@@ -47,8 +51,6 @@ public class BRGroupPanel extends BRMainPanel {
 		if(false) { 
 			this.removeAll();
 			this.repaint();
-			
-			
 	//		System.out.println("Selected group is " + selectedGrp);
 			int grpNum = groups.length;
 			this.setLayout(new GridLayout(grpNum,1));
@@ -67,10 +69,12 @@ public class BRGroupPanel extends BRMainPanel {
 			int grpNum = groups.length;
 			this.setLayout( new BorderLayout(  ));
 			JScrollPane scrollPane = new JScrollPane();
-			JList<String> gNameList = new JList<String>(groups);
+			gNameList = new JList<String>(groups);
 			gNameList.setPreferredSize(new Dimension(this.groupPanelWidth*2/3, 
 									   this.groupPanelHeight/2));
 			
+			ListSelectionModel listSelectionModel =  gNameList.getSelectionModel();
+	        listSelectionModel.addListSelectionListener(this.controller);
 			/** TODO set fonts**/
 			//Font f = gNameList.getFont();
 			//gNameList.setFont(new Font(f.getName(), Font.ITALIC,3*f.getSize()));
@@ -83,7 +87,7 @@ public class BRGroupPanel extends BRMainPanel {
 					selectedIndex = i;
 			gNameList.setSelectedIndex( selectedIndex );
 			
-			
+			//gNameList.addListSelectionListener(listener);
 			
 			
 			
@@ -98,21 +102,43 @@ public class BRGroupPanel extends BRMainPanel {
 			//System.out.println(gNameList.get)
 			this.add(new JScrollPane(gNameList));
 			this.revalidate();
+			//this.registerListener(this.controller);
 		}
 	}
 
 	@Override
 	public void registerListener(BRAbstractController a) {
-		// TODO Auto-generated method stub
+//		this.controller = (BRGoupPanelController) a;
+//		// TODO Auto-generated method stub
 //		System.out.println("I am here registering");
-		for (Component c : this.getComponents())
-		{
-		      if (c instanceof JRadioButton)
-		      {
-//		    	   System.out.println("I am reg listener in the group panel, the has code of the traget is " + a.toString());
-		    	  JRadioButton tmp = (JRadioButton)c;
-		           tmp.addActionListener(a);
-		      }
-		 }
+//		for (Component c : this.getComponents())
+//		{
+//		      if (c instanceof JList)
+//		      {
+//		    	  JRadioButton tmp = (JRadioButton)c;
+//		          tmp.addActionListener(a);
+//		      }
+//		 }
+	}
+	
+	public String getListSelectedString() {
+//		System.out.println("getListSelectedString is " + gNameList.getSelectedValue());
+//		String res = "";
+////		for (Component c : this.getComponents())
+////		{
+////			  System.out.println(c.getClass().toString());
+////		      if (c instanceof JList)
+////		      {
+////		    	  System.out.println("I am reg listener in the group panel, the has code of the traget is ");
+////		    	  //JRadioButton tmp = (JRadioButton)c;
+////		      }
+////		 }
+		
+		return gNameList.getSelectedValue();
+	}
+	
+	
+	public void setController(BRGoupPanelController c) {
+		this.controller = c;
 	}
 }

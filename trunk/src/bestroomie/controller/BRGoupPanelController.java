@@ -11,12 +11,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import bestroomie.entities.*;
 import bestroomie.gui.*;
 import bestroomie.util.BRConst;
 
-public class BRGoupPanelController extends BRAbstractController {
+public class BRGoupPanelController extends BRAbstractController implements ListSelectionListener{
 
 	private BRGroupPanel view;
 	private BRUser	model;
@@ -27,6 +29,7 @@ public class BRGoupPanelController extends BRAbstractController {
 		this.view = p;
 		this.model = u;
 		this.mainController = c;
+		this.view.setController(this);
 		//this.setupGroupLists(grpList, selectedGroup);
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +39,7 @@ public class BRGoupPanelController extends BRAbstractController {
 	public void refreshUI() {
 		String selectedGrp = this.mainController.getSelectedGrp().getGroupId();
 		this.setupGroupLists(selectedGrp);
-		this.view.registerListener(this);
+		//this.view.registerListener(this);
 	}
 	
 	
@@ -55,7 +58,7 @@ public class BRGoupPanelController extends BRAbstractController {
 		this.setupGroupLists(e.getActionCommand());
 		this.mainController.setSelectedGrp(e.getActionCommand());
 		this.mainController.refreshUI();
-		System.out.println("I am here listening " + e.getActionCommand());
+//		System.out.println("I am here listening " + e.getActionCommand());
 	}
 
 	@Override
@@ -79,5 +82,19 @@ public class BRGoupPanelController extends BRAbstractController {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getValueIsAdjusting()) {
+			int selectedIndex = e.getLastIndex();
+			
+			this.view.getListSelectedString();
+			this.mainController.setSelectedGrp(this.view.getListSelectedString());
+			
+			//System.out.println("The newly set grp id is " + this.view.getListSelectedString());
+			this.mainController.refreshUI();
+		}
 	}
 }
