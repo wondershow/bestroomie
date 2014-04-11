@@ -17,6 +17,7 @@ public class BRMainGuiController extends BRAbstractController {
 	private BRGoupPanelController groupController;
 	private BRChoreTabController choreController;
 	private BRGroupPanel userPanel;
+	private BRChoreTab choreTab;
 	
 	public void refreshUI() {
 		this.mainFrame.pack();
@@ -25,7 +26,6 @@ public class BRMainGuiController extends BRAbstractController {
 		this.mainFrame.setVisible(true);
 		this.headController.refreshUI();
 		this.groupController.refreshUI();
-		
 	}
 
 	/**
@@ -71,8 +71,7 @@ public class BRMainGuiController extends BRAbstractController {
 	
 	
 	public void setupGUI() {
-		
-		
+
 		
 	}
 	
@@ -83,8 +82,7 @@ public class BRMainGuiController extends BRAbstractController {
 		System.out.println("I am doing action performed in the main gui controller.");
 	}
 	
-	
-	
+
 
 	@Override
 	protected void goToController(BRAbstractEntity e, BRAbstractController b) {
