@@ -23,9 +23,6 @@ public class BRChoreTab extends BRMainPanel {
 		int height = BRMainPanel.tabHeight;
 		this.setPreferredSize(new Dimension(wid,height));
 		this.add(jbtShowChores);
-
-		
-		
 	}
 
 	public static void main(String[] args) {
