@@ -28,6 +28,7 @@ public class BRLoginController extends BRAbstractController {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("Fuck putin: !!!" + e.getActionCommand()+"111");
 		if(e.getActionCommand().equals("Login")) {
 			
 			if(!this.validateCaptcha())
@@ -38,11 +39,16 @@ public class BRLoginController extends BRAbstractController {
 				if(!this.validateUser())
 					this.view.displayView(BRConst.DBMessages.ERROR_VALIDATION_FAILURE);
 				else{
-					BRUser m = new BRUser("c","d");
-					BRMainView v = new BRMainView();
-					BRMainViewController c = new BRMainViewController(m,v);
-					v.registerListener(c);
-					v.setVisible(true);	
+//					BRUser m = new BRUser("c","d");
+//					BRMainView v = new BRMainView();
+//					BRMainViewController c = new BRMainViewController(m,v);
+//					v.registerListener(c);
+//					v.setVisible(true);	
+					
+					//Go to MainUI
+					this.view.dispose();
+					BRMainGuiController mainGui = new BRMainGuiController(this.model);
+					mainGui.refreshUI();
 				}
 			}
 			
