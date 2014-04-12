@@ -1,2 +1,5 @@
-transactionID:group:title:date:assignment:amount:approval:paid
-a@b.com201404132.31pm:group1:Beer:20140413:user1,user2:23.30,45.20:yes,yes:no,no
+transactionID : group: catagory : date: payer_list: allocated_amount : payers_approval : payers_if_paid : description : total_amount
+a@b.com201404132.31pm:group1:2:20140413:user1,user2:23.30,45.20:yes,yes:no,no: asdf : 68.50
+lei@here.com201404111937:group1:3:20140411:user1,user2:23,26:yes,yes:no,no: asdf : 89
+lei@here.com201304111937:group1:4:20140411:user1,user2:23,26:yes,yes:no,no: asdf : 46
+lei@here.com201204111937:group1:2:20140411:user1,user2:23,26:yes,yes:no,no: asdf : 57
