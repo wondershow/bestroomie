@@ -47,7 +47,7 @@ public class BRGoupPanelController extends BRAbstractController implements ListS
 	 *  be displayed in a different color 
 	 * **/
 	public void setupGroupLists(String selectedGroup) {
-		String grpNameList[] = this.model.getUserGroup().split(BRConst.DBFile.GROUP_SEPERATOR);
+		String grpNameList[] = this.model.getUserGroup().split(BRConst.DBFile.SUBFIELD_SEPERATOR);
 		this.view.setupGroupLists(grpNameList,selectedGroup);
 	}
 	
