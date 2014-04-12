@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import bestroomie.util.BRConst;
 
@@ -60,6 +61,48 @@ public class BRDBConnector {
 			e.printStackTrace();
 		}
 		
+		return res;
+	}
+	
+	
+	/**
+	 * To read/return all the matched  lines from a file,
+	 * The lines are specified by the patternStr and field count 
+	 * @patternStr
+	 * @fieldCount 
+	 ***/
+	public ArrayList<String> getAllMatchedRecords(String patternStr,int fieldCount) {
+		
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + this.dbFileName;
+		FileReader fr;
+		BufferedReader br;
+		String strInputLine = "";
+		
+		try {
+			fr = new FileReader(dbFileFullPath);
+			br = new BufferedReader(fr);
+			strInputLine = br.readLine();
+			
+			String[] fields;
+			
+			while(strInputLine != null) {
+				strInputLine = strInputLine.trim();
+				if(strInputLine.equals("")) continue; //handles empty lines
+				fields = strInputLine.split(this.fldSeperator);
+				//find the matching line
+				if(fields[fieldCount].equals(patternStr)) {
+					res.add(strInputLine);
+				}
+				strInputLine = br.readLine();
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			res = null;
+			e.printStackTrace();
+		}
 		return res;
 	}
 	
