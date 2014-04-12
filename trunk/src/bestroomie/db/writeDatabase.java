@@ -14,7 +14,7 @@ public class writeDatabase {
 	private static String name, email, password, groups;
 	private static String folder = bestroomie.util.BRConst.DBFile.PATH_TO_DB_FOLDER;
 	private static String fieldSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
-	private static String groupSeperator = bestroomie.util.BRConst.DBFile.GROUP_SEPERATOR;
+	private static String groupSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
 	private static int nameLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_NAME+1;
 	private static int emailLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_EMAIL+1;
 	private static int passwordLocation = bestroomie.util.BRConst.DBUserFile.ROW_OF_USER_PASS+1;
