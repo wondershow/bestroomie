@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import bestroomie.controller.BRAbstractController;
 import bestroomie.entities.BRBill;
+import bestroomie.entities.BRChore;
 
 public class BRMainGui extends BRAbstractView implements MouseListener{
 	
@@ -50,7 +51,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		return this.leftPanel;
 	}
 	
-	public BRMainGui(ArrayList<BRBill> old) {
+	public BRMainGui(ArrayList<BRBill> old, ArrayList<BRChore> old2) {
 		
 		leftPanel = new JPanel();
 		int wid = BRMainPanel.groupPanelWidth;
@@ -65,7 +66,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		leftPanel.add(groupPanel,BorderLayout.CENTER);
 		leftPanel.add(groupMemPanel,BorderLayout.SOUTH);
 		
-		choreTab = new BRChoreTab();
+		choreTab = new BRChoreTab(old2);
 		billTab = new BRBillTab(old);
 		
 		JTabbedPane jp = new JTabbedPane();

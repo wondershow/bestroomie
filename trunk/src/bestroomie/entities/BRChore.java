@@ -1,7 +1,10 @@
 package bestroomie.entities;
 
+import java.util.ArrayList;
+
 import bestroomie.db.BRDBConnector;
 import bestroomie.util.BRConst;
+import bestroomie.util.CATAGORY_INDEX;
 
 public class BRChore extends BRAbstractEntity{
 
@@ -127,5 +130,26 @@ public class BRChore extends BRAbstractEntity{
 		
 		return res;
 	}
+	
+	public static ArrayList<BRChore> getAllChoresInGrp(String group) {
+		ArrayList<BRChore> res = new ArrayList<BRChore>();
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_CHORESDB);
+		
+		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID);
+		for(int i=0;i<lines.size();i++){
+			BRChore chore = new BRChore();
+			String line = lines.get(i);
+			
+			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+			chore.setChoreGroup(strArr[BRConst.DBChoreFile.COLUMN_OF_GROUP]);
+			chore.setChoreDescription(strArr[BRConst.DBChoreFile.COLUMN_OF_DESCRIPTION]);
+			chore.setChoreDate(strArr[BRConst.DBChoreFile.COLUMN_OF_DATE]);
+			chore.setChoreAssignment(strArr[BRConst.DBChoreFile.COLUMN_OF_ASSIGNMENT]);
+			chore.setChoreCompletion(strArr[BRConst.DBChoreFile.COLUMN_OF_COMPLETION]);
+
+			res.add(chore);
+		}
+		return res;
+	} 
 	
 }

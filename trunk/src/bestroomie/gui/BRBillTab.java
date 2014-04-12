@@ -27,7 +27,6 @@ import javax.swing.table.TableCellRenderer;
 
 import bestroomie.controller.BRAbstractController;
 import bestroomie.entities.BRBill;
-import bestroomie.test.ButtonExample.JTableModel;
 import bestroomie.util.CATAGORY_INDEX;
 
 public class BRBillTab extends BRMainPanel {

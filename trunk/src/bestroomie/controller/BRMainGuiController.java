@@ -46,7 +46,7 @@ public class BRMainGuiController extends BRAbstractController {
 	
 	public BRMainGuiController(BRUser u) {
 		this.user = u;
-		BRMainGui gui = new BRMainGui(   BRBill.getAllBillsInGrp((this.user.getFirstGrpId()) )    );
+		BRMainGui gui = new BRMainGui(BRBill.getAllBillsInGrp((this.user.getFirstGrpId()) ), BRChore.getAllChoresInGrp((this.user.getFirstGrpId())));
 		this.mainFrame = gui;
 		
 		//Initialize a default group
@@ -55,7 +55,7 @@ public class BRMainGuiController extends BRAbstractController {
 		//Initialize all the subcontrollers
 		this.headController = new BRHeadPanelController(this.user,this.mainFrame.getHeadPanel(),this);
 		this.groupController = new BRGoupPanelController(this.user,this.mainFrame.getGroupPanel(),this);
-		this.choreController = new BRChoreTabController(this.chore,this.mainFrame.getChoreTab(),this);
+		this.choreController = new BRChoreTabController(this.user,this.mainFrame.getChoreTab(),this);
 		
 		
 //		this.refreshUI();

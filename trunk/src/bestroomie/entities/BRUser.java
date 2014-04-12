@@ -171,7 +171,11 @@ public class BRUser extends BRAbstractEntity{
 			return false;
 		else {
 			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+			try{
 			this.setUserGroup(strArr[BRConst.DBUserFile.ROW_OF_USER_GROUP]);
+			}catch (ArrayIndexOutOfBoundsException e){
+				this.setUserGroup("");
+			}
 			this.setUserName(strArr[BRConst.DBUserFile.ROW_OF_USER_NAME]);
 			this.setUserPass(strArr[BRConst.DBUserFile.ROW_OF_USER_PASS]);
 			return true;

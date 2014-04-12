@@ -52,7 +52,7 @@ public class BRMainView extends BRAbstractView {
 	
 	public BRMainView () {
 		this.setupUI();
-      %comments.
+      //%comments.
 	}
 	
 	public static void main(String args[]) {
