@@ -46,7 +46,7 @@ public class BRMainGuiController extends BRAbstractController {
 	
 	public BRMainGuiController(BRUser u) {
 		this.user = u;
-		BRMainGui gui = new BRMainGui();
+		BRMainGui gui = new BRMainGui(   BRBill.getAllBillsInGrp((this.user.getFirstGrpId()) )    );
 		this.mainFrame = gui;
 		
 		//Initialize a default group
