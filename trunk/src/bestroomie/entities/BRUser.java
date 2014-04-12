@@ -130,7 +130,7 @@ public class BRUser extends BRAbstractEntity{
 		else {
 			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
 			String tmpStr = strArr[BRConst.DBGroupFile.COLUMN_OF_GROUP_MEMBER];
-			res = tmpStr.split(BRConst.DBFile.GROUP_SEPERATOR).length;
+			res = tmpStr.split(BRConst.DBFile.SUBFIELD_SEPERATOR).length;
 		}
 		return res;
 	}
@@ -140,7 +140,7 @@ public class BRUser extends BRAbstractEntity{
 	 * To return the first group that this user belongs to
 	 * **/
 	public String getFirstGrpId(){
-		String tmp[] = this.userGroup.split(BRConst.DBFile.GROUP_SEPERATOR);
+		String tmp[] = this.userGroup.split(BRConst.DBFile.SUBFIELD_SEPERATOR);
 		if(tmp != null && tmp.length>=1)
 			return tmp[0];
 		else
@@ -164,9 +164,7 @@ public class BRUser extends BRAbstractEntity{
 		this.userPass = "";
 	}
 
-	@Override
 	public boolean load() {
-		// TODO Auto-generated method stub
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_USERDB);
 		String line = dbConn.BRDBRead(this.userEmail, BRConst.DBUserFile.ROW_OF_USER_EMAIL);
 		if (line == null) // not matching record found
