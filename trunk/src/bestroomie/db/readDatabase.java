@@ -14,7 +14,7 @@ public class readDatabase {
 	private static String name, email, password, groups;
 	private static String folder = bestroomie.util.BRConst.DBFile.PATH_TO_DB_FOLDER;
 	private static String fieldSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
-	private static String groupSeperator = bestroomie.util.BRConst.DBFile.GROUP_SEPERATOR;
+	private static String groupSeperator = bestroomie.util.BRConst.DBFile.FIELD_SEPERATOR;
 	
 	public static boolean validateUser(String userName, String password) {
 	
