@@ -44,7 +44,7 @@ public final class BRConst {
 		public static final String FILE_NAME_TRANSDB = "TransactionDB";
 		public static final String PATH_TO_DB_FOLDER = "brfolder/dbfolder/";
 		public static final String FIELD_SEPERATOR = ":";
-		public static final String GROUP_SEPERATOR = ",";
+		public static final String SUBFIELD_SEPERATOR = ",";
 	}
 	
 	/**
@@ -93,4 +93,26 @@ public final class BRConst {
 		public static final int COLUMN_OF_COMPLETION = 4;
 	}
 	
+	public static final class DBTransFile{
+		private DBTransFile() {}
+		public static final int TOTAL_NUM_OF_COLUMNS = 10;
+		
+		//0 column is the key
+		public static final int COLUMN_OF_TABLE_KEY = 0;
+		
+		
+		//transactionID : group: catagory: date: payer: amount : approval : paid : description : total_amoun
+		public static final int COLUMN_NUM_OF_TRANSID = 0;
+		public static final int COLUMN_NUM_OF_GROUPID = 1;
+		public static final int COLUMN_NUM_OF_CATAGORYID = 2;
+		public static final int COLUMN_NUM_OF_DATE = 3;
+		public static final int COLUMN_NUM_OF_PAYERID = 4;
+		public static final int COLUMN_NUM_OF_AMOUNT = 5;
+		public static final int COLUMN_NUM_OF_APPROVAL = 6;
+		public static final int COLUMN_NUM_OF_PAID = 7;
+		public static final int COLUMN_NUM_OF_DESCTIPTION = 8;
+		public static final int COLUMN_NUM_OF_TOTAL = 9;
+		
+		
+	}
 }
