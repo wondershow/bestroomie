@@ -8,10 +8,12 @@ package bestroomie.gui;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import bestroomie.controller.BRAbstractController;
+import bestroomie.entities.BRBill;
 
 public class BRMainGui extends BRAbstractView implements MouseListener{
 	
@@ -48,7 +50,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		return this.leftPanel;
 	}
 	
-	public BRMainGui() {
+	public BRMainGui(ArrayList<BRBill> old) {
 		
 		leftPanel = new JPanel();
 		int wid = BRMainPanel.groupPanelWidth;
@@ -64,7 +66,8 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		leftPanel.add(groupMemPanel,BorderLayout.SOUTH);
 		
 		choreTab = new BRChoreTab();
-		billTab = new BRBillTab();
+		billTab = new BRBillTab(old);
+		
 		JTabbedPane jp = new JTabbedPane();
     	jp.addTab("Chore", choreTab);
     	jp.addTab("Bill", billTab);
@@ -90,11 +93,11 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 	
 	
 	public static void main(String args[]) {
-		BRMainGui gui = new BRMainGui();
-		gui.pack();
-		gui.setResizable(false);
-		gui.setLocationRelativeTo(null);
-		gui.setVisible(true);
+//		BRMainGui gui = new BRMainGui(old);
+//		gui.pack();
+//		gui.setResizable(false);
+//		gui.setLocationRelativeTo(null);
+//		gui.setVisible(true);
 	}
 	
 	
