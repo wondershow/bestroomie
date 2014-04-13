@@ -70,8 +70,8 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		billTab = new BRBillTab(oldBills,impendingBills,userId);
 		
 		JTabbedPane jp = new JTabbedPane();
+		jp.addTab("Bill", billTab);
     	jp.addTab("Chore", choreTab);
-    	jp.addTab("Bill", billTab);
     	
     	JPanel bodyPanel = new JPanel();
     	bodyPanel.add(leftPanel,BorderLayout.WEST);
