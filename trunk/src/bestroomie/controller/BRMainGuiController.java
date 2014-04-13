@@ -17,6 +17,7 @@ public class BRMainGuiController extends BRAbstractController {
 	private	BRHeadPanelController headController;
 	private BRGoupPanelController groupController;
 	private BRChoreTabController choreController;
+	private BRBillTabContoller billController;
 	private BRGroupPanel userPanel;
 	private BRChoreTab choreTab;
 	
@@ -27,6 +28,7 @@ public class BRMainGuiController extends BRAbstractController {
 		this.mainFrame.setVisible(true);
 		this.headController.refreshUI();
 		this.groupController.refreshUI();
+		
 	}
 
 	/**
@@ -60,7 +62,10 @@ public class BRMainGuiController extends BRAbstractController {
 		this.headController = new BRHeadPanelController(this.user,this.mainFrame.getHeadPanel(),this);
 		this.groupController = new BRGoupPanelController(this.user,this.mainFrame.getGroupPanel(),this);
 		this.choreController = new BRChoreTabController(this.mainFrame.getChoreTab(),this);
-		
+		this.billController  = new BRBillTabContoller(u,
+				  									  BRBill.getAllSettledBillInGrp(this.getSelectedGrp().getGroupId(),u.getUserEmail()),
+				  									  BRBill.getAllImpendingBillInGrp(this.getSelectedGrp().getGroupId(),u.getUserEmail()),
+				  									  this);
 		
 //		this.refreshUI();
 ////		//
