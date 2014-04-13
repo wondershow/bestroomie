@@ -10,13 +10,13 @@ import bestroomie.util.BRConst;
 
 public class BRChoreTabController extends BRAbstractController {
 	
-	private BRUser user;
+	private BRChore chore;
 	private BRChoreTab view;
 	private BRMainGuiController mainController;
 	
-	public BRChoreTabController(BRUser u,BRChoreTab p,BRMainGuiController c) {
+	public BRChoreTabController(BRChore ch,BRChoreTab p,BRMainGuiController c) {
 		this.view = p;
-		this.user = u;
+		this.chore = ch;
 		this.mainController = c;
 	}
 	
@@ -30,13 +30,13 @@ public class BRChoreTabController extends BRAbstractController {
 	}
 	
 	public static void main(String[] args){
-		BRUser u = new BRUser();
-		u.setUserEmail("lei@here.com");
-		u.load();
+		BRChore ch = new BRChore();
+		ch.setChoreGroup("group1");
+		ch.load();
 		
 		BRChoreTab p = new BRChoreTab(BRChore.getAllChoresInGrp("group1"));
-		BRMainGuiController mainController = new BRMainGuiController(u);
-		BRChoreTabController c = new BRChoreTabController(u,p,mainController);
+		BRMainGuiController mainController = new BRMainGuiController(ch);
+		BRChoreTabController c = new BRChoreTabController(ch,p,mainController);
 		//c.setupGroupLists(u.getFirstGrpId());
 		//p.registerListener(c);
 		
