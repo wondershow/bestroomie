@@ -1,6 +1,7 @@
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -55,7 +56,7 @@ public class BRMainGuiController extends BRAbstractController {
 		//Initialize all the subcontrollers
 		this.headController = new BRHeadPanelController(this.user,this.mainFrame.getHeadPanel(),this);
 		this.groupController = new BRGoupPanelController(this.user,this.mainFrame.getGroupPanel(),this);
-		this.choreController = new BRChoreTabController(this.user,this.mainFrame.getChoreTab(),this);
+		this.choreController = new BRChoreTabController(this.chore,this.mainFrame.getChoreTab(),this);
 		
 		
 //		this.refreshUI();
@@ -68,7 +69,30 @@ public class BRMainGuiController extends BRAbstractController {
 		//this.refreshUI();
 	}
 	
-	
+	public BRMainGuiController(BRChore ch) {
+		this.chore = ch;
+		
+		BRMainGui gui = new BRMainGui(BRBill.getAllBillsInGrp((this.user.getFirstGrpId()) ), BRChore.getAllChoresInGrp((this.user.getFirstGrpId())));
+		this.mainFrame = gui;
+		
+		//Initialize a default group
+		this.setSelectedGrp(this.user.getFirstGrpId());
+		
+		//Initialize all the subcontrollers
+		this.headController = new BRHeadPanelController(this.user,this.mainFrame.getHeadPanel(),this);
+		this.groupController = new BRGoupPanelController(this.user,this.mainFrame.getGroupPanel(),this);
+		this.choreController = new BRChoreTabController(this.chore,this.mainFrame.getChoreTab(),this);
+		
+		
+//		this.refreshUI();
+////		//
+//		this.groupController.setupGroupLists(this.user.getFirstGrpId());
+//		this.mainFrame.getGroupPanel().registerListener(this.groupController);
+//		this.mainFrame.getHeadPanel().registerListener(this.headController);
+//		System.out.println("The target should be " + this.groupController.toString());
+		//this.mainFrame.registerListener(headController);
+		//this.refreshUI();
+	}
 	
 	public void setupGUI() {
 
