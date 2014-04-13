@@ -35,6 +35,15 @@ public class BRBillTabContoller extends BRAbstractController{
 		this.mainController = c;
 	}
 	
+	public BRUser getUser() {
+		return this.user;
+	}
+	
+	public BRMainGuiController getMainController() {
+		return this.mainController;
+	} 
+	
+	
 	public BRBillTab getView() {
 		return this.view;
 	}

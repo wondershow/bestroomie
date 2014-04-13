@@ -58,7 +58,8 @@ public class BRAddBillController extends BRAbstractController {
 		u.load();
 		BRGroup g = new BRGroup(u.getFirstGrpId());
 		g.load();
-		BRAddBillView v = new BRAddBillView(g.getGroupMemberObjs(), u,g);
+		
+		BRAddBillView v = new BRAddBillView(g.getGroupMemberObjs(u.getUserEmail()), u,g);
 		System.out.println("The first groud id is " + u.getFirstGrpId());
 		
 		
