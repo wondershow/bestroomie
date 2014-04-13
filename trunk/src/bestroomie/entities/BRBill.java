@@ -84,9 +84,11 @@ public class BRBill extends BRAbstractEntity{
 	}
 	
 	public String getPayerListAsStr() {
-		String res = "";
-		for(int i=0;i<payerList.length;i++)
-			res = payerList+",";
+		String res = payerList[0];
+		if(payerList.length>1) {
+			for(int i=1;i<payerList.length;i++)
+				res += "," + payerList[i];
+		}
 		return res;
 	}
 	
@@ -105,9 +107,17 @@ public class BRBill extends BRAbstractEntity{
 		for(int i=0;i<tmp.length;i++)
 			this.amountList[i] = Float.parseFloat(tmp[i]);
 	}
+	
+	public String getAmntAsStr() {
+		String res = String.valueOf(amountList[0]);
+		if(amountList.length>1) {
+			for(int i=1;i<amountList.length;i++)
+				res += "," + amountList[i];
+		}
+		return res;
+	}
 
 	public boolean[] getApprovalList() {
-		
 		return approvalList;
 	}
 
@@ -120,6 +130,22 @@ public class BRBill extends BRAbstractEntity{
 			else
 				this.approvalList[i] = true;
 		} 
+	}
+	
+	public String getApprovalAsStr() {
+		String res = ""; 
+		if(approvalList[0])
+			res = "yes";
+		else
+			res = "no";
+		if(approvalList.length>1) {
+			for(int i=1;i<approvalList.length;i++)
+				if(approvalList[i])
+					res += "," + "yes";
+				else
+					res += "," + "no";
+		}
+		return res;
 	}
 
 	public boolean[] getPaidList() {
@@ -136,6 +162,22 @@ public class BRBill extends BRAbstractEntity{
 				this.paidList[i] = true;
 		}
 	}
+	
+	public String getPaidAsStr() {
+		String res = ""; 
+		if(paidList[0])
+			res = "yes";
+		else
+			res = "no";
+		if(paidList.length>1) {
+			for(int i=1;i<paidList.length;i++)
+				if(paidList[i])
+					res += "," + "yes";
+				else
+					res += "," + "no";
+		}
+		return res;
+	}
 
 	public CATAGORY_INDEX getCatagory() {
 		return catagory;
@@ -147,20 +189,37 @@ public class BRBill extends BRAbstractEntity{
 	
 	@Override
 	protected String serilize() {
-		// TODO Auto-generated method stub
-		return null;
+		String res = "";
+		/**
+		 * transactionID : group: catagory : date: payer_list: allocated_amount : payers_approval : payers_if_paid : description : total_amount
+			a@b.com_201404132.31pm:group1:2:20140413:user1,user2:23.30,45.20:yes,yes:no,no: asdf : 68.50
+		 * 
+		 * **/
+		res += this.transId + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.group + BRConst.DBFile.FIELD_SEPERATOR;
+		res += String.valueOf(CATAGORY_INDEX.toInt(this.catagory)) + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getDate() + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getPayerListAsStr() + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getAmntAsStr() + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getApprovalAsStr() + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getPaidAsStr() + BRConst.DBFile.FIELD_SEPERATOR;
+		res += this.getDescription()+ BRConst.DBFile.FIELD_SEPERATOR;
+		res += String.valueOf(this.getTotal_amount());
+		
+		return res;
 	}
 
 	@Override
 	protected boolean loadEntity(String s) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	protected boolean saveToDB() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean saveToDB() {
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_TRANSDB);
+		String lineStr = this.serilize();
+		boolean res = dbConn.BRDBWrite(lineStr, this.getTransId(), BRConst.DBTransFile.COLUMN_NUM_OF_TRANSID);
+		return res;
 	}
 
 	/**
@@ -213,7 +272,11 @@ public class BRBill extends BRAbstractEntity{
 //		System.out.println(b.getDate());
 		ArrayList<BRBill> list = BRBill.getAllSettledBillInGrp("group1", "lei@here.com");
 		ArrayList<BRBill> list1 = BRBill.getAllImpendingBillInGrp("group1", "lei@here.com");
-		System.out.println("List1 size is " + list1.size());
+		//System.out.println("List1 size is " + list1.size());
+		list.get(0).approve("matt@here.com");
+		System.out.println(list.get(0).serilize());
+		list.get(0).saveToDB();
+		
 	}
 	
 	
@@ -280,5 +343,15 @@ public class BRBill extends BRAbstractEntity{
 		
 	}
 	
-	
+	/***
+	 * This function "Improves" an impending transaction for user specified by parameter "userId"
+	 * **/
+	public void approve(String userId) {
+		for(int i=0;i<this.payerList.length;i++) {
+			if(this.payerList[i].equals(userId)) {
+				this.approvalList[i] = true;
+				break;
+			}
+		}
+	}
 }

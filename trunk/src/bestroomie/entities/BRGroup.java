@@ -54,7 +54,7 @@ public class BRGroup extends BRAbstractEntity{
 	}
 
 	@Override
-	protected boolean saveToDB() {
+	public boolean saveToDB() {
 		// TODO Auto-generated method stub
 		return false;
 	}
