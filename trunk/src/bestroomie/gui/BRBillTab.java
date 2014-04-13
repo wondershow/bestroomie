@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -32,40 +33,66 @@ import bestroomie.util.CATAGORY_INDEX;
 public class BRBillTab extends BRMainPanel {
 	
 //	private ArrayList
-	private ArrayList<BRBill> oldBillList;
 	private JTable oldTable;
+	private JTable impendingTable;
 	private JScrollPane oldScrollPane;
+	private JScrollPane impendingScrollPane;
+	private String userId;
 	
 	
-	public BRBillTab(ArrayList<BRBill> old) {
+	public BRBillTab(ArrayList<BRBill> old,String id) {
 		int wid = BRMainPanel.tabWidth;
 		int height = BRMainPanel.tabHeight;
 		this.setPreferredSize(new Dimension(wid,height));
-		this.oldBillList = old;
-		JTableModel.setArrayList(old);
+		ImpendingJTableModel.setArrayList(old);
+//		ArrayList<BRBill> n = new ArrayList<BRBill> old;
+		OldJTableModel.setArrayList(old);
+		this.userId = id;
 		this.setupUI();
 	}
 	
 	public void updateBillLists(ArrayList<BRBill> old) {
-		JTableModel.setArrayList(old);
+		OldJTableModel.setArrayList(old);
+		ImpendingJTableModel.setArrayList(old);
 		this.setupUI();
 	}
 	
+	
 	public void setupUI() {
-//		JTable historyTable = new JTable(new HistoryJTableModel());
+//		JTable historyTable = new JTable(new HistoryOldJTableModel());
 //		JScrollPane scrollPane = new JScrollPane(historyTable);
 //		historyTable.setFillsViewportHeight(true);
 		
-		this.oldTable = new JTable(new JTableModel());
-        this.oldScrollPane = new JScrollPane(oldTable);
+		this.oldTable = new JTable(new OldJTableModel());
+        this.oldScrollPane = new JScrollPane(this.oldTable);
 		this.oldTable.setFillsViewportHeight(true);
-		
-		//TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-		//table.getColumn("Button1").setCellRenderer(buttonRenderer);
-		//table.getColumn("Button2").setCellRenderer(buttonRenderer);
 		this.oldTable.addMouseListener(new JTableButtonMouseListener(this.oldTable));
+		//this.oldScrollPane.setPreferredSize( new Dimension(this.getSize().width,this.getSize().height/3)  );
+		this.oldTable.setPreferredSize( new Dimension(BRMainPanel.tabWidth *9/10, BRMainPanel.tabWidth /3));
+		this.oldScrollPane.setPreferredSize( new Dimension(BRMainPanel.tabWidth *9/10, BRMainPanel.tabWidth /3));
 		
-		this.add(this.oldScrollPane);
+		
+		//this.oldScrollPane.setMaximumSize( new Dimension(200,200));
+		
+		this.impendingTable = new JTable(new ImpendingJTableModel());
+		this.impendingScrollPane = new JScrollPane(this.impendingTable);
+		this.impendingTable.setFillsViewportHeight(true);
+		this.impendingTable.addMouseListener(new JTableButtonMouseListener(this.impendingTable));
+		this.impendingTable.setPreferredSize( new Dimension(BRMainPanel.tabWidth *9/10, BRMainPanel.tabWidth /3));
+		this.impendingScrollPane.setPreferredSize( new Dimension(BRMainPanel.tabWidth *9/10, BRMainPanel.tabWidth /3));
+
+		//this.impendingScrollPane.setPreferredSize( new Dimension()               );
+		
+		//table.getColumn("Button2").setCellRenderer(buttonRenderer);
+		
+		this.add(this.oldScrollPane,BorderLayout.NORTH);
+		this.add(this.impendingScrollPane,BorderLayout.CENTER);
+		JPanel p = new JPanel();
+//		p.setPreferredSize(new Dimension(this.getSize().width,this.getSize().height/4));
+		JButton b = new JButton("add");
+//		this.add(p);
+		this.add(b,BorderLayout.SOUTH);
+		//this.add(comp)
 	}
 
 	public static void main(String[] args) {
@@ -82,50 +109,6 @@ public class BRBillTab extends BRMainPanel {
 	@Override
 	public void registerListener(BRAbstractController a) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
-	
-	public static class HistoryJTableModel extends AbstractTableModel {
-		
-		//private static 
-		private static final String[] COLUMN_NAMES = new String[] {"Catagory", "Payer", "Amount", "Payee"};
-		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, Integer.class,  String.class};
-		
-		
-		
-		@Override
-		public int getColumnCount() {
-			// TODO Auto-generated method stub
-			return COLUMN_NAMES.length;
-		}
-
-		@Override
-		public int getRowCount() {
-			return 0;
-		}
-
-		@Override
-		public Object getValueAt(final int rowIndex, final int columnIndex) {
-				switch (columnIndex) {
-				case 0: return rowIndex;
-				case 1: return "Text for " + rowIndex;
-				case 2: // fall through
-				case 3: final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
-						button.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								JOptionPane.showMessageDialog(JOptionPane.getFrameForComponent(button), 
-										"Button clicked for row "+rowIndex);
-							}
-						});
-						return button;
-				default: return "Error";
-			}
-		} 
-		
-		
 		
 	}
 	
@@ -149,26 +132,22 @@ public class BRBillTab extends BRMainPanel {
 		}
 	}
 	
-	
-	public static class JTableModel extends AbstractTableModel {
+	public static class OldJTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private static final String[] COLUMN_NAMES = new String[] {"Date", "TotalAmount", "Catagory", "Payee","Catagory"};
-		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class,  String.class,String.class};
+		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class,  String.class, JButton.class};
 		private static ArrayList<BRBill> billList;
-		
-		
 		
 		public static void setArrayList(ArrayList<BRBill> b) {
 			billList = b;
 		}
-		
 		
 		@Override public int getColumnCount() {
 			return COLUMN_NAMES.length;
 		}
 
 		@Override public int getRowCount() {
-			return JTableModel.billList.size();
+			return OldJTableModel.billList.size();
 		}
 		
 		@Override public String getColumnName(int columnIndex) {
@@ -179,19 +158,6 @@ public class BRBillTab extends BRMainPanel {
 			return COLUMN_TYPES[columnIndex];
 		}
 		
-		
-		/***
-		 * private String transId;
-		   private String group;
-		   private CATAGORY_INDEX catagory; 
-		   private String date;
-		   private String[] payerList;
-		    private float[] amountList; 
-			private boolean[] approvalList;
-			private boolean[] paidList;
-			private String description;
-			private float total_amount;
-		 * **/
 		@Override 
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
 			BRBill b = billList.get(rowIndex);
@@ -208,7 +174,59 @@ public class BRBillTab extends BRMainPanel {
 		}	
 	}
 	
-	private static class JTableButtonRenderer implements TableCellRenderer {		
+	public static class ImpendingJTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 1L;
+		private static final String[] COLUMN_NAMES = new String[] {"Date", "TotalAmount", "Catagory", "Payee","Catagory","Approve"};
+		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class, String.class, String.class, String.class};
+		private static ArrayList<BRBill> billList;
+		
+		public static void setArrayList(ArrayList<BRBill> b) {
+			billList = b;
+		}
+		
+		@Override public int getColumnCount() {
+			return COLUMN_NAMES.length;
+		}
+
+		@Override public int getRowCount() {
+			return OldJTableModel.billList.size();
+		}
+		
+		@Override public String getColumnName(int columnIndex) {
+	        return COLUMN_NAMES[columnIndex];
+	    }
+		
+		@Override public Class<?> getColumnClass(int columnIndex) {
+			return COLUMN_TYPES[columnIndex];
+		}
+		
+		@Override 
+		public Object getValueAt(final int rowIndex, final int columnIndex) {
+			BRBill b = billList.get(rowIndex);
+			
+			switch (columnIndex) {
+				case 0: return b.getDate();
+				case 1: return b.getTotal_amount();
+				case 2: return CATAGORY_INDEX.getCatagoryString(b.getCatagory());
+				case 3: return "4";
+				case 4: return "5";
+				case 5: final JButton button = new JButton("Approve");
+						button.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								int dialogButton = JOptionPane.YES_NO_OPTION;
+								int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to approve this bill?","Warning",dialogButton);
+								if(dialogResult == JOptionPane.YES_OPTION){
+									
+								}
+							}
+						});
+						return button;
+				default: return "Error";
+			}
+		}
+	}
+	
+	private static class JTableButtonRenderer implements TableCellRenderer {
 		@Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			JButton button = (JButton)value;
 			if (isSelected) {
