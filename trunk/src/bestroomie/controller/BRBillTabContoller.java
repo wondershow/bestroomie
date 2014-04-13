@@ -46,7 +46,9 @@ public class BRBillTabContoller extends BRAbstractController{
 		u.setUserEmail("lei@here.com");
 		u.load();
 		
-		BRBillTab p = new BRBillTab(BRBill.getAllBillsInGrp("group1"));
+		
+		
+		BRBillTab p = new BRBillTab(BRBill.getAllBillsInGrp("group1"),u.getUserEmail());
 		BRMainGuiController mainController = new BRMainGuiController(u);
 		BRBillTabContoller c = new BRBillTabContoller(u,p,mainController);
 		//c.setupGroupLists(u.getFirstGrpId());
