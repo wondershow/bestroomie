@@ -89,7 +89,10 @@ public class BRDBConnector {
 			
 			while(strInputLine != null) {
 				strInputLine = strInputLine.trim();
-				if(strInputLine.equals("")) continue; //handles empty lines
+				if(strInputLine.equals("")) {
+					strInputLine = br.readLine();
+					continue; //handles empty lines
+				}
 				fields = strInputLine.split(this.fldSeperator);
 				//find the matching line
 				if(fields[fieldCount].equals(patternStr)) {
