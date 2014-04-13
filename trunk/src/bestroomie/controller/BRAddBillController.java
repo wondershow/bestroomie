@@ -8,26 +8,33 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRBill;
 import bestroomie.entities.BRGroup;
+import bestroomie.entities.BRUser;
 import bestroomie.gui.BRAbstractView;
 import bestroomie.gui.BRAddBillView;
 
 public class BRAddBillController extends BRAbstractController {
 
-	private BRAbstractEntity model;
-	private BRAbstractView view;
+	private BRUser uModel;
+	private BRAddBillView view;
 	private String uid;
 	private String gid;
 	private BRGroup gModel;
 	
 	
 	
-	public BRAddBillController(BRAbstractEntity e, BRAbstractView v, String uid, String gid) {
-		this.model = e;
+	public BRAddBillController(BRUser u, BRGroup g, BRAddBillView v) {
+		this.uModel = u;
 		this.view = v;
-		this.uid = uid;
-		this.gid = gid;
-		this.gModel = new BRGroup(gid);
+		this.gModel = g;
+		this.gModel.load();
 	}
+	
+//	public void addNewBRBill() {
+//		
+//		
+//		
+//		
+//	}
 	
 	
 	@Override
@@ -44,17 +51,28 @@ public class BRAddBillController extends BRAbstractController {
 	
 	
 	public static void main(String args[]) {
-		BRAddBillView v = new BRAddBillView();
+		
 		BRBill m = new BRBill();
-		BRAddBillController c = new BRAddBillController(m,v,"a@here.com","group1");
-		c.gModel.load();
+		BRUser u = new BRUser();
+		u.setUserEmail("lei@here.com");
+		u.load();
+		BRGroup g = new BRGroup(u.getFirstGrpId());
+		g.load();
+		BRAddBillView v = new BRAddBillView(g.getGroupMemberObjs(), u,g);
+		System.out.println("The first groud id is " + u.getFirstGrpId());
+		
+		
+		BRAddBillController c = new BRAddBillController(u,g,v);
+		
 		ArrayList<String> usrList = c.gModel.getGroupMember();
+		
+		System.out.println("User list size is " + usrList.size() );
 		
 		String oneUser = "";
 		for (String s : usrList)   
 			oneUser = s;
 		//	System.out.println(s);
-		v.setPayeeText(oneUser);
+		//v.setPayeeText(oneUser);
 		v.setVisible(true);
 	}
 
