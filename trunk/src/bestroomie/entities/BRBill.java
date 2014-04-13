@@ -1,6 +1,8 @@
 package bestroomie.entities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import bestroomie.db.BRDBConnector;
 import bestroomie.util.BRConst;
@@ -33,6 +35,10 @@ public class BRBill extends BRAbstractEntity{
 	
 	public String getDescription() {
 		return description;
+	}
+	
+	public void setCreateUser(String s) {
+		this.createrUser = s;
 	}
 
 	public void setDescription(String description) {
@@ -96,6 +102,10 @@ public class BRBill extends BRAbstractEntity{
 	public void setPayerList(String payer) {
 		this.payerList = payer.split(BRConst.DBFile.SUBFIELD_SEPERATOR);
 	}
+	
+	public void setPayerList(String s[]) {
+		this.payerList = s;
+	}
 
 	public float[] getAmntList() {
 		return amountList;
@@ -107,6 +117,12 @@ public class BRBill extends BRAbstractEntity{
 		for(int i=0;i<tmp.length;i++)
 			this.amountList[i] = Float.parseFloat(tmp[i]);
 	}
+	
+	public void setAmntList(float f[]) {
+		this.amountList = f;
+	}
+	
+	
 	
 	public String getAmntAsStr() {
 		String res = String.valueOf(amountList[0]);
@@ -130,6 +146,10 @@ public class BRBill extends BRAbstractEntity{
 			else
 				this.approvalList[i] = true;
 		} 
+	}
+	
+	public void setApprovalList(boolean b[]) {
+		this.approvalList = b;
 	}
 	
 	public String getApprovalAsStr() {
@@ -161,6 +181,10 @@ public class BRBill extends BRAbstractEntity{
 			else
 				this.paidList[i] = true;
 		}
+	}
+	
+	public void setPaidList(boolean b[]) {
+		this.paidList = b;
 	}
 	
 	public String getPaidAsStr() {
@@ -279,6 +303,15 @@ public class BRBill extends BRAbstractEntity{
 		
 	}
 	
+	public void addNewBill(String strUId) {
+		this.setCreateUser(strUId);
+		Calendar now = Calendar.getInstance();  
+	    String suffix = "" + now.get(Calendar.YEAR) + now.get(Calendar.MONTH) + now.get(Calendar.DAY_OF_MONTH)+ 
+	    				now.get(Calendar.HOUR_OF_DAY) + now.get(Calendar.MINUTE);
+		String transId = strUId + BRConst.DBTransFile.ID_CONNECTOR + suffix;
+		this.setTransId(transId);
+		this.saveToDB();
+	}
 	
 	/***
 	 * Get all the settled transactions that in the group(specified by groupid), 
