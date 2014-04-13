@@ -14,8 +14,11 @@ public class BRChoreTabController extends BRAbstractController {
 	private BRChoreTab view;
 	private BRMainGuiController mainController;
 	
-	public BRChoreTabController(BRChore ch,BRChoreTab p,BRMainGuiController c) {
+	public BRChoreTabController(BRChoreTab p,BRMainGuiController c) {
 		this.view = p;
+		BRChore ch = new BRChore();
+		ch.setChoreGroup(c.getSelectedGrp().getGroupId());
+		ch.load();
 		this.chore = ch;
 		this.mainController = c;
 	}
@@ -31,12 +34,17 @@ public class BRChoreTabController extends BRAbstractController {
 	
 	public static void main(String[] args){
 		BRChore ch = new BRChore();
-		ch.setChoreGroup("group1");
+//		ch.setChoreGroup("group1");
 		ch.load();
 		
+		BRUser u = new BRUser();
+		u.setUserEmail("lei@here.com");
+		u.load();
+		
 		BRChoreTab p = new BRChoreTab(BRChore.getAllChoresInGrp("group1"));
-		BRMainGuiController mainController = new BRMainGuiController(ch);
-		BRChoreTabController c = new BRChoreTabController(ch,p,mainController);
+		BRMainGuiController mainController = new BRMainGuiController(u);
+		mainController.setSelectedGrp("group1");
+		BRChoreTabController c = new BRChoreTabController(p,mainController);
 		//c.setupGroupLists(u.getFirstGrpId());
 		//p.registerListener(c);
 		

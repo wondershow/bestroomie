@@ -51,7 +51,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		return this.leftPanel;
 	}
 	
-	public BRMainGui(ArrayList<BRBill> old, ArrayList<BRChore> old2) {
+	public BRMainGui(ArrayList<BRBill> old, ArrayList<BRChore> old2, String userId) {
 		
 		leftPanel = new JPanel();
 		int wid = BRMainPanel.groupPanelWidth;
@@ -67,7 +67,7 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		leftPanel.add(groupMemPanel,BorderLayout.SOUTH);
 		
 		choreTab = new BRChoreTab(old2);
-		billTab = new BRBillTab(old);
+		billTab = new BRBillTab(old,userId);
 		
 		JTabbedPane jp = new JTabbedPane();
     	jp.addTab("Chore", choreTab);
