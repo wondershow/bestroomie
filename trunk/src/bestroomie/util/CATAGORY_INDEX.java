@@ -25,6 +25,24 @@ public enum CATAGORY_INDEX {
         return null;
     }
 	
+	public static int toInt(CATAGORY_INDEX x) {
+        switch(x) {
+        case AUTO:
+            return 0;
+        case DINING:
+            return 1;
+        case CLOTHING:
+        	return 2;
+        case GROCERY:
+        	return 3;
+        case RENT:
+        	return 4;
+        case UTILITY:
+        	return 5;
+        }
+        return -1;
+    }
+	
 	public static String getCatagoryString(CATAGORY_INDEX i) {
 		switch(i) {
         case AUTO:
