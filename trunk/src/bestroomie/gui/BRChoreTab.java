@@ -144,11 +144,11 @@ public class BRChoreTab extends BRMainPanel {
 			
 			
 			switch (columnIndex) {
-				case 0: return c.getChoreDescription();
-				case 1: return c.getChoreDate();
-				case 2: return c.getChoreCompletion();
-				case 3: return "4";
-				case 4: return "5";
+				case 0: return c.getChoreGroup();
+				case 1: return c.getChoreDescription();
+				case 2: return c.getChoreDate();
+				case 3: return c.getChoreAssignment();
+				case 4: return c.getChoreCompletion();
 				default: return "Error";
 			}
 		}	
