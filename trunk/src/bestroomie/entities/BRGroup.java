@@ -37,13 +37,19 @@ public class BRGroup extends BRAbstractEntity{
 		return gMembers;
 	}
 	
-	public ArrayList<BRUser> getGroupMemberObjs() {
+	/***
+	 * 
+	 * Return all the group numbers EXCEPT the user specified by userId
+	 * **/
+	public ArrayList<BRUser> getGroupMemberObjs(String userId) {
 		ArrayList<BRUser> res = new ArrayList<BRUser>();
 		for(int i=0;i<gMembers.size();i++){
 			BRUser u = new BRUser();
-			u.setUserEmail(gMembers.get(i));
-			u.load();
-			res.add(u);
+			if(!gMembers.get(i).equals(userId)){
+				u.setUserEmail(gMembers.get(i));
+				u.load();
+				res.add(u);
+			}
 		}
 		return res;
 	}
