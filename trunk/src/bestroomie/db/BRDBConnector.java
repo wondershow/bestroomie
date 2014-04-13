@@ -124,8 +124,8 @@ public class BRDBConnector {
 		BufferedReader br;
 		PrintWriter output = null;
 		String strInputLine = "";
-		String tmpFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + "userDB.temp";
-		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + this.dbFileName;
+		String tmpFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + BRConst.DBFile.FILE_NAME_TRANSDB + "tmp";
+		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + BRConst.DBFile.FILE_NAME_TRANSDB;
 		
 		
 		try {
@@ -140,6 +140,8 @@ public class BRDBConnector {
 				fields = strInputLine.split(this.fldSeperator);
 				//write only when the keyword does not exist in the file
 				if(fields[fieldCount].equals(id)) {
+					System.out.println("I am writing:");
+					System.out.println(line);
 					output.println(line);
 					needToWriteNewLine = false;
 				}
