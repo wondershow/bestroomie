@@ -20,6 +20,7 @@ public class BRBill extends BRAbstractEntity{
 	transactionID : group: catagory : date: payers: allocated_amount : payers_approval : payers_if_paid : description : total_amount
 	 * */
 	private String transId;
+	private String createrUser;
 	private String group;
 	private CATAGORY_INDEX catagory; 
 	private String date;
@@ -51,8 +52,16 @@ public class BRBill extends BRAbstractEntity{
 	}
 
 	public void setTransId(String transId) {
+		String tmp[] = transId.split(BRConst.DBTransFile.ID_CONNECTOR);
+		this.createrUser = tmp[0];
 		this.transId = transId;
 	}
+	
+	public String getCreator() {
+		
+		return this.createrUser;
+	}
+	
 
 	public String getGroup() {
 		return group;
@@ -154,29 +163,41 @@ public class BRBill extends BRAbstractEntity{
 		return false;
 	}
 
+	/**
+	 * To split the string from database,
+	 * put all the corresponding fields into group object
+	 * **/
+	private void loadGroup(String line) {
+		String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+		//this.setTransId(line);
+		this.setTransId(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_TRANSID]);
+		this.setGroup(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID]);
+		//this.setAllocation(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
+		int tmpInt = Integer.parseInt(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_CATAGORYID]);
+		this.setCatagory(CATAGORY_INDEX.fromInteger(tmpInt) );
+		this.setDate(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DATE]);
+		this.setPayerList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAYERID]);
+		this.setAmntList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
+		this.setApprovalList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_APPROVAL]);
+		this.setPaidList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAID]);
+		this.setDescription(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DESCTIPTION]);
+		this.setTotal_amount(Float.parseFloat(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_TOTAL].trim()));
+	}
+	
+	
+	
+	
 	@Override
 	public boolean load() {
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_TRANSDB);
 		String line = dbConn.BRDBRead(this.transId, BRConst.DBTransFile.COLUMN_OF_TABLE_KEY);
 		
-		System.out.println(line);
+//		System.out.println(line);
 		
 		if (line == null) // not matching record found
 			return false;
 		else {
-			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
-			//this.setTransId(line);
-			this.setGroup(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID]);
-			//this.setAllocation(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
-			int tmpInt = Integer.parseInt(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_CATAGORYID]);
-			this.setCatagory(CATAGORY_INDEX.fromInteger(tmpInt) );
-			this.setDate(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DATE]);
-			this.setPayerList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAYERID]);
-			this.setAmntList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
-			this.setApprovalList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_APPROVAL]);
-			this.setPaidList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAID]);
-			this.setDescription(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DESCTIPTION]);
-			this.setTotal_amount(Float.parseFloat(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_TOTAL].trim()));
+			this.loadGroup(line);
 			return true;
 		}
 		// TODO Auto-generated method stub
@@ -186,14 +207,23 @@ public class BRBill extends BRAbstractEntity{
 	
 	
 	public static void main(String s[]) {
-		BRBill b = new BRBill();
-		b.setTransId("lei@here.com201404111937");
-		b.load();
-		System.out.println(b.getDate());
-		
+//		BRBill b = new BRBill();
+//		b.setTransId("lei@here.com201404111937");
+//		b.load();
+//		System.out.println(b.getDate());
+		ArrayList<BRBill> list = BRBill.getAllSettledBillInGrp("group1", "lei@here.com");
+		ArrayList<BRBill> list1 = BRBill.getAllImpendingBillInGrp("group1", "lei@here.com");
+		System.out.println("List1 size is " + list1.size());
 	}
 	
-	public static ArrayList<BRBill> getAllBillsInGrp(String group) {
+	
+	/***
+	 * Get all the settled transactions that in the group(specified by groupid), 
+	 * the user has approved or he started
+	 * @group the group id
+	 * @user the user id
+	 * ***/
+	public static ArrayList<BRBill> getAllSettledBillInGrp(String group, String usrId) {
 		ArrayList<BRBill> res = new ArrayList<BRBill>();
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_TRANSDB);
 		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID);
@@ -201,22 +231,54 @@ public class BRBill extends BRAbstractEntity{
 			BRBill bill = new BRBill();
 			String line = lines.get(i);
 			
-			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
-			//this.setTransId(line);
-			bill.setGroup(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID]);
-			//this.setAllocation(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
-			int tmpInt = Integer.parseInt(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_CATAGORYID]);
-			bill.setCatagory(CATAGORY_INDEX.fromInteger(tmpInt) );
-			bill.setDate(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DATE]);
-			bill.setPayerList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAYERID]);
-			bill.setAmntList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_AMOUNT]);
-			bill.setApprovalList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_APPROVAL]);
-			bill.setPaidList(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_PAID]);
-			bill.setDescription(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_DESCTIPTION]);
-			bill.setTotal_amount(Float.parseFloat(strArr[BRConst.DBTransFile.COLUMN_NUM_OF_TOTAL].trim()));
+			bill.loadGroup(line);
 			
-			res.add(bill);
+			String tmpPayerList[] = bill.getPayerList();
+			boolean tmpIfAppriedList[] = bill.getApprovalList() ;
+			
+			if(bill.getCreator().equals(usrId))
+				res.add(bill);
+			else {
+				for(int j=0;j<tmpPayerList.length;j++) {
+					if(tmpPayerList[j].equals(usrId) && tmpIfAppriedList[j]) {
+						res.add(bill);
+						break;
+					}
+				}
+			}
 		}
 		return res;
-	} 
+	}
+	
+	/***
+	 * Get all the impending transactions that in the group(specified by groupid), 
+	 * the user has approved or he started
+	 * @group the group id
+	 * @user the user id
+	 * ***/
+	public static ArrayList<BRBill> getAllImpendingBillInGrp(String group, String usrId) {
+		ArrayList<BRBill> res = new ArrayList<BRBill>();
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_TRANSDB);
+		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID);
+		for(int i=0;i<lines.size();i++){
+			BRBill bill = new BRBill();
+			String line = lines.get(i);
+			
+			bill.loadGroup(line);
+			
+			String tmpPayerList[] = bill.getPayerList();
+			boolean tmpIfAppriedList[] = bill.getApprovalList() ;
+		
+			for(int j=0;j<tmpPayerList.length;j++) {
+				if(tmpPayerList[j].equals(usrId) && !tmpIfAppriedList[j]) {
+					res.add(bill);
+					break;
+				}
+			}
+		}
+		return res;
+		
+	}
+	
+	
 }
