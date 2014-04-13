@@ -100,6 +100,8 @@ public final class BRConst {
 		//0 column is the key
 		public static final int COLUMN_OF_TABLE_KEY = 0;
 		
+		public static final String ID_CONNECTOR = "_";
+		
 		
 		//transactionID : group: catagory: date: payer: amount : approval : paid : description : total_amoun
 		public static final int COLUMN_NUM_OF_TRANSID = 0;
