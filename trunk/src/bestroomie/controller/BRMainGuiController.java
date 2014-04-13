@@ -66,6 +66,7 @@ public class BRMainGuiController extends BRAbstractController {
 				  									  BRBill.getAllSettledBillInGrp(this.getSelectedGrp().getGroupId(),u.getUserEmail()),
 				  									  BRBill.getAllImpendingBillInGrp(this.getSelectedGrp().getGroupId(),u.getUserEmail()),
 				  									  this);
+		this.mainFrame.getBillTab().setController(this.billController);
 		
 //		this.refreshUI();
 ////		//
