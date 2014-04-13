@@ -3,6 +3,8 @@ a@b.com_201404132.31pm:group1:2:20140413:user1,user2:23.30,45.20:yes,yes:no,no: 
 lei@here.com_201404111937:group1:3:20140411:matt@here.com,max@here.com:23,26:yes,yes:no,no: asdf : 89
 lei@here.com_201304111937:group1:4:20140408:matt@here.com,max@here.com:23,26:yes,yes:no,no: asdf : 46
 lei@here.com_201204111937:group1:2:20080407:matt@here.com,max@here.com:23,26:no,yes:no,no: asdf : 57
-max@here.com_201103051138:group1:1:20090403:matt@here.com,lei@here.com:23.0,26.0:no,no:no,no: asdf :57
-matt@here.com_201103051138:group1:3:20100405:lei@here.com,max@here.com:35.0,49.0:no,no:no,no:asdf :57.0
-matt@here.com_201103051142:group1:3:20110405:lei@here.com,max@here.com:35.0,49.0:no,no:no,no:asdf :57.0
+max@here.com_201103051138:group1:1:20090403:matt@here.com,lei@here.com:23.0,26.0:no,no:no,no: asdf :110.0
+matt@here.com_201103051138:group1:3:20100405:lei@here.com,max@here.com:35.0,49.0:no,no:no,no:asdf :230
+matt@here.com_201103051142:group1:3:20110405:lei@here.com,max@here.com:35.0,49.0:no,no:no,no:asdf :450
+max@here.com_200103051138:group1:1:20120403:matt@here.com,lei@here.com:23.0,26.0:no,no:no,no: asdf :8
+max@here.com_190103051138:group1:1:20120403:matt@here.com,lei@here.com:23.0,26.0:no,no:no,no: asdf :98
