@@ -6,6 +6,7 @@ Class Description:
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -20,13 +21,42 @@ public class BRBillTabContoller extends BRAbstractController{
 	private BRUser user;
 	private BRBillTab view;
 	private BRMainGuiController mainController;
+	private ArrayList<BRBill> old;
+	private ArrayList<BRBill> impending;
 	
 	
-	public BRBillTabContoller( BRUser u,BRBillTab p,BRMainGuiController c) {
+	public BRBillTabContoller( BRUser u, ArrayList<BRBill> oldList, ArrayList<BRBill> impendingList,BRMainGuiController c) {
 		// TODO Auto-generated constructor stub
 		this.user = u;
-		this.view = p;
+		this.old = oldList;
+		this.impending = impendingList;
+		this.view = new BRBillTab(oldList,impendingList,u.getUserEmail());
+		this.view.setController(this);
 		this.mainController = c;
+	}
+	
+	public BRBillTab getView() {
+		return this.view;
+	}
+	
+	public void refreshUI() {
+		
+		
+	}
+	
+	
+	
+	public void approveTransaction(int index) {
+		
+		BRBill b = impending.get(index);
+		b.approve(this.user.getUserEmail());
+		b.saveToDB();
+		this.old = BRBill.getAllSettledBillInGrp(this.mainController.getSelectedGrp().getGroupId(), this.user.getUserEmail());
+		this.impending = BRBill.getAllImpendingBillInGrp(this.mainController.getSelectedGrp().getGroupId(), this.user.getUserEmail());
+		
+		this.view = new BRBillTab(this.old,this.impending,this.user.getUserEmail());
+		//this.mainController.setupGUI();
+		this.view.updateBillLists(this.old,this.impending);
 	}
 
 	@Override
@@ -46,21 +76,19 @@ public class BRBillTabContoller extends BRAbstractController{
 		u.setUserEmail("lei@here.com");
 		u.load();
 		
-		
-		
-		BRBillTab p = new BRBillTab(BRBill.getAllSettledBillInGrp("group1",u.getUserEmail()),
-								    BRBill.getAllSettledBillInGrp("group1",u.getUserEmail()),
-									//BRBill.getAllImpendingBillInGrp("group1",u.getUserEmail()),
-									u.getUserEmail());
 		BRMainGuiController mainController = new BRMainGuiController(u);
-		BRBillTabContoller c = new BRBillTabContoller(u,p,mainController);
+		BRBillTabContoller c = new BRBillTabContoller(u,
+													  BRBill.getAllSettledBillInGrp("group1",u.getUserEmail()),
+													  BRBill.getAllImpendingBillInGrp("group1",u.getUserEmail()),
+													  mainController);
+		
 		//c.setupGroupLists(u.getFirstGrpId());
 		//p.registerListener(c);
 		
 		
 		
 		JFrame frame = new JFrame();
-		frame.add(p);
+		frame.add(c.getView());
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
