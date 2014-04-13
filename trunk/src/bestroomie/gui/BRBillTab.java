@@ -27,6 +27,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import bestroomie.controller.BRAbstractController;
+import bestroomie.controller.BRBillTabContoller;
 import bestroomie.entities.BRBill;
 import bestroomie.util.CATAGORY_INDEX;
 
@@ -38,9 +39,11 @@ public class BRBillTab extends BRMainPanel {
 	private JScrollPane oldScrollPane;
 	private JScrollPane impendingScrollPane;
 	private String userId;
+	private BRBillTabContoller bTabCtrl;
 	
 	
 	public BRBillTab(ArrayList<BRBill> old, ArrayList<BRBill> impending, String id) {
+		
 		int wid = BRMainPanel.tabWidth;
 		int height = BRMainPanel.tabHeight;
 		this.setPreferredSize(new Dimension(wid,height));
@@ -51,12 +54,25 @@ public class BRBillTab extends BRMainPanel {
 		this.setupUI();
 	}
 	
+	public void setController(BRBillTabContoller c) {
+		this.bTabCtrl = c;
+		ImpendingJTableModel.setController(this.bTabCtrl);
+	}
+	
+	
 	public void updateBillLists(ArrayList<BRBill> old,ArrayList<BRBill> impending) {
 		OldJTableModel.setArrayList(old);
 		ImpendingJTableModel.setArrayList(impending);
-		this.setupUI();
+		ImpendingJTableModel.setController(this.bTabCtrl);
+		System.out.println("I am removing all!!");
+		this.removeAll();
+		this.oldTable.removeRowSelectionInterval(1, 2);
+//		this.revalidate();
+//		this.repaint();
+//		this.updateUI();
+		//
+		//this.setupUI();
 	}
-	
 	
 	public void setupUI() {
 //		JTable historyTable = new JTable(new HistoryOldJTableModel());
@@ -179,6 +195,7 @@ public class BRBillTab extends BRMainPanel {
 		private static final String[] COLUMN_NAMES = new String[] {"Date", "TotalAmount", "Catagory", "Payee","Catagory","Approve"};
 		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class, String.class, String.class, String.class};
 		private static ArrayList<BRBill> impendingBillList;
+		private static BRBillTabContoller bTabCtrl;
 		
 		public static void setArrayList(ArrayList<BRBill> b) {
 			impendingBillList = b;
@@ -186,6 +203,10 @@ public class BRBillTab extends BRMainPanel {
 		
 		@Override public int getColumnCount() {
 			return COLUMN_NAMES.length;
+		}
+		
+		public static void setController(BRBillTabContoller c) {
+			bTabCtrl = c;
 		}
 
 		@Override public int getRowCount() {
@@ -202,7 +223,6 @@ public class BRBillTab extends BRMainPanel {
 		
 		@Override 
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
-			System.out.println("rowIndex:" + rowIndex + ", billList size is " + impendingBillList.size() );
 			
 			BRBill b = ImpendingJTableModel.impendingBillList.get(rowIndex);
 			
@@ -218,7 +238,9 @@ public class BRBillTab extends BRMainPanel {
 								int dialogButton = JOptionPane.YES_NO_OPTION;
 								int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to approve this bill?","Warning",dialogButton);
 								if(dialogResult == JOptionPane.YES_OPTION){
+									//ImpendingJTableModel.bTabCtrl.approveTransaction(b.getTransId());
 									
+									bTabCtrl.approveTransaction(rowIndex);
 								}
 							}
 						});
