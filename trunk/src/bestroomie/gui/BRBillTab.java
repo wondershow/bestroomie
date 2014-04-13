@@ -40,20 +40,20 @@ public class BRBillTab extends BRMainPanel {
 	private String userId;
 	
 	
-	public BRBillTab(ArrayList<BRBill> old,String id) {
+	public BRBillTab(ArrayList<BRBill> old, ArrayList<BRBill> impending, String id) {
 		int wid = BRMainPanel.tabWidth;
 		int height = BRMainPanel.tabHeight;
 		this.setPreferredSize(new Dimension(wid,height));
-		ImpendingJTableModel.setArrayList(old);
 //		ArrayList<BRBill> n = new ArrayList<BRBill> old;
 		OldJTableModel.setArrayList(old);
+		ImpendingJTableModel.setArrayList(impending);
 		this.userId = id;
 		this.setupUI();
 	}
 	
-	public void updateBillLists(ArrayList<BRBill> old) {
+	public void updateBillLists(ArrayList<BRBill> old,ArrayList<BRBill> impending) {
 		OldJTableModel.setArrayList(old);
-		ImpendingJTableModel.setArrayList(old);
+		ImpendingJTableModel.setArrayList(impending);
 		this.setupUI();
 	}
 	
@@ -160,7 +160,7 @@ public class BRBillTab extends BRMainPanel {
 		
 		@Override 
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
-			BRBill b = billList.get(rowIndex);
+			BRBill b = OldJTableModel.billList.get(rowIndex);
 			
 			
 			switch (columnIndex) {
@@ -178,10 +178,10 @@ public class BRBillTab extends BRMainPanel {
 		private static final long serialVersionUID = 1L;
 		private static final String[] COLUMN_NAMES = new String[] {"Date", "TotalAmount", "Catagory", "Payee","Catagory","Approve"};
 		private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class, String.class, String.class, String.class};
-		private static ArrayList<BRBill> billList;
+		private static ArrayList<BRBill> impendingBillList;
 		
 		public static void setArrayList(ArrayList<BRBill> b) {
-			billList = b;
+			impendingBillList = b;
 		}
 		
 		@Override public int getColumnCount() {
@@ -189,7 +189,7 @@ public class BRBillTab extends BRMainPanel {
 		}
 
 		@Override public int getRowCount() {
-			return OldJTableModel.billList.size();
+			return ImpendingJTableModel.impendingBillList.size();
 		}
 		
 		@Override public String getColumnName(int columnIndex) {
@@ -202,7 +202,9 @@ public class BRBillTab extends BRMainPanel {
 		
 		@Override 
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
-			BRBill b = billList.get(rowIndex);
+			System.out.println("rowIndex:" + rowIndex + ", billList size is " + impendingBillList.size() );
+			
+			BRBill b = ImpendingJTableModel.impendingBillList.get(rowIndex);
 			
 			switch (columnIndex) {
 				case 0: return b.getDate();
