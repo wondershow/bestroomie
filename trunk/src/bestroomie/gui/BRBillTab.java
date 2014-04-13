@@ -28,11 +28,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import bestroomie.controller.BRAbstractController;
+import bestroomie.controller.BRAddBillController;
 import bestroomie.controller.BRBillTabContoller;
 import bestroomie.entities.BRBill;
+import bestroomie.entities.BRGroup;
+import bestroomie.entities.BRUser;
 import bestroomie.util.CATAGORY_INDEX;
 
-public class BRBillTab extends BRMainPanel {
+public class BRBillTab extends BRMainPanel implements ActionListener {
 	
 //	private ArrayList
 	private JTable oldTable;
@@ -161,7 +164,8 @@ public class BRBillTab extends BRMainPanel {
 		this.add(this.impendingScrollPane,BorderLayout.CENTER);
 		JPanel p = new JPanel();
 //		p.setPreferredSize(new Dimension(this.getSize().width,this.getSize().height/4));
-		JButton b = new JButton("add");
+		JButton b = new JButton("Add Bill");
+		b.addActionListener(this);
 //		this.add(p);
 		this.add(b,BorderLayout.SOUTH);
 		//this.add(comp)
@@ -331,5 +335,16 @@ public class BRBillTab extends BRMainPanel {
 		    }
 			return button;	
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		BRGroup grp = this.bTabCtrl.getMainController().getSelectedGrp();
+		BRUser user = this.bTabCtrl.getUser();
+		BRAddBillView v = new BRAddBillView(grp.getGroupMemberObjs(user.getUserEmail()), user,grp);
+		BRAddBillController c = new BRAddBillController(user,grp,v);
+		v.setVisible(true);
+		v.setLocationRelativeTo(null);
 	}
 }
