@@ -134,11 +134,14 @@ public class BRChore extends BRAbstractEntity{
 	public static ArrayList<BRChore> getAllChoresInGrp(String group) {
 		ArrayList<BRChore> res = new ArrayList<BRChore>();
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_CHORESDB);
+		System.out.println("Chores DB: " + BRConst.DBFile.FILE_NAME_CHORESDB);
 		
-		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID);
+		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBChoreFile.COLUMN_OF_GROUP);
+		System.out.println("lines: " + lines.size());
 		for(int i=0;i<lines.size();i++){
 			BRChore chore = new BRChore();
 			String line = lines.get(i);
+			System.out.println("Chores line: " + line);
 			
 			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
 			chore.setChoreGroup(strArr[BRConst.DBChoreFile.COLUMN_OF_GROUP]);

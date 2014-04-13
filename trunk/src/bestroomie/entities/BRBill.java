@@ -196,7 +196,6 @@ public class BRBill extends BRAbstractEntity{
 	public static ArrayList<BRBill> getAllBillsInGrp(String group) {
 		ArrayList<BRBill> res = new ArrayList<BRBill>();
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_TRANSDB);
-		
 		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBTransFile.COLUMN_NUM_OF_GROUPID);
 		for(int i=0;i<lines.size();i++){
 			BRBill bill = new BRBill();
