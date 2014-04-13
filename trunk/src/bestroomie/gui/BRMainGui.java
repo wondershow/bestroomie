@@ -59,9 +59,9 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 		
 		leftPanel.setPreferredSize(new Dimension(wid,height));
 		groupPanel = new BRGroupPanel();
-		groupPanel.setBackground(new Color(255,0,0));
+		//groupPanel.setBackground(new Color(255,0,0));
 		groupMemPanel = new BRGrpmemPanel();
-		groupMemPanel.setBackground(new Color(0,255,0));
+		//groupMemPanel.setBackground(new Color(0,255,0));
 		
 		leftPanel.add(groupPanel,BorderLayout.CENTER);
 		leftPanel.add(groupMemPanel,BorderLayout.SOUTH);
