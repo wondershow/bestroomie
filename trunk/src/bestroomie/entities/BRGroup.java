@@ -37,6 +37,17 @@ public class BRGroup extends BRAbstractEntity{
 		return gMembers;
 	}
 	
+	public ArrayList<BRUser> getGroupMemberObjs() {
+		ArrayList<BRUser> res = new ArrayList<BRUser>();
+		for(int i=0;i<gMembers.size();i++){
+			BRUser u = new BRUser();
+			u.setUserEmail(gMembers.get(i));
+			u.load();
+			res.add(u);
+		}
+		return res;
+	}
+	
 
 	@Override
 	protected String serilize() {
@@ -46,8 +57,6 @@ public class BRGroup extends BRAbstractEntity{
 
 	@Override
 	protected boolean loadEntity(String s) {
-		
-		
 		
 		// TODO Auto-generated method stub
 		return false;
