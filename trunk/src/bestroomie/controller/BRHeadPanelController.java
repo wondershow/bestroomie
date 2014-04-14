@@ -38,7 +38,7 @@ public class BRHeadPanelController extends BRAbstractController {
 		this.mainController = c;
 		this.refreshUI();
 		this.view.registerListener(this);
-		this.view.getBrSettings().registerListener(this);
+		//this.view.getBrSettings().registerListener(this);
 	}
 
 	/**
@@ -51,9 +51,8 @@ public class BRHeadPanelController extends BRAbstractController {
 		String userName = this.model.getUserName();
 
 		int numInGrp = this.model.getGroupSize(grpId);
-		System.out.println("I am setting numInGrp " + numInGrp + ", grpId "
-				+ grpId);
-		this.view.setGrpStatsLbl(numInGrp, grpId);
+		
+		this.view.setText(this.model.getUserName(), grpId, numInGrp);
 	}
 
 	@Override
