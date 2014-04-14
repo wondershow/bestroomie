@@ -88,12 +88,13 @@ public class BRMainGui extends BRAbstractView implements MouseListener{
 	
 	public void setupUI() {
 		
-		
+		this.setTitle("HomePage");
 	}
 	
 	
 	
 	public static void main(String args[]) {
+		
 //		BRMainGui gui = new BRMainGui(old);
 //		gui.pack();
 //		gui.setResizable(false);
