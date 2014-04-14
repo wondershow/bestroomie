@@ -28,7 +28,6 @@ public class BRLoginController extends BRAbstractController {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Fuck putin: !!!" + e.getActionCommand()+"111");
 		if(e.getActionCommand().equals("Login")) {
 			
 			if(!this.validateCaptcha())
