@@ -256,6 +256,7 @@ public void updateCaptchaImage() {
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setTitle("Login");
 		
 	}
 	
