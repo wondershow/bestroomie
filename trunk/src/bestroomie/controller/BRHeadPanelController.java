@@ -39,14 +39,15 @@ public class BRHeadPanelController extends BRAbstractController{
 		String grpId = mainController.getSelectedGrp().getGroupId();
 		System.out.println("The grop id in the maincontroller is " + grpId);
 		String userName = this.model.getUserName();
-		if(userName.trim()!="")
-			this.view.setWelcomeLbl(this.model.getUserName());
-		else
-			this.view.setWelcomeLbl("NoName");
-		
+//		if(userName.trim()!="")
+//			this.view.setWelcomeLbl(this.model.getUserName());
+//		else
+//			this.view.setWelcomeLbl("NoName");
+//		
 		int numInGrp = this.model.getGroupSize(grpId);
 		System.out.println("I am setting numInGrp " + numInGrp + ", grpId " + grpId);
-		this.view.setGrpStatsLbl(numInGrp, grpId);
+//		this.view.setGrpStatsLbl(numInGrp, grpId);
+		this.view.setText(this.model.getUserName(), grpId, numInGrp);
 	}
 
 	
