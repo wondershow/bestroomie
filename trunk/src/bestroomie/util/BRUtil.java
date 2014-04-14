@@ -69,4 +69,34 @@ public class BRUtil {
 	        }
 		return res;
 	}
+	
+	/***
+	 * Given a string and a length,
+	 * return a new string with the given length containing leading spaces and the parameter string
+	 * 
+	 * **/
+	public static String fixedLenthString(String string, int length) {
+        return String.format("%1$"+length+ "s", string);
+    }
+	
+	/**
+	 * Given a number and a width,
+	 *  return a new string with the given fixed width containing leading spaces and the parameter number
+	 * **/
+	public static String fixedLengthInt(int n) {
+		
+		String res = String.valueOf(n);
+		
+		if(n>=10000)
+			return res;
+		else if( n >=1000)
+			res = " " + res;
+		else if ( n >= 100)
+			res = "  " + res;
+		else if ( n >= 10)
+			res = "   " + res;
+		else
+			res = "    " + res;
+		return res;
+	}
 }
