@@ -68,7 +68,7 @@ import java.awt.*;
 
 public class BRHeadPanel extends BRMainPanel {
 
-   
+    private BRSettings brSettings;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,6 +166,12 @@ public class BRHeadPanel extends BRMainPanel {
 //    	System.out.println(BRHeadPanel.fixedLenthString("asdf",10));
 	}
     
-    
+    public BRSettings getBrSettings() {
+		return brSettings;
+	}
+
+	public void setBrSettings(BRSettings brSettings) {
+		this.brSettings = brSettings;
+	}
 }
 
