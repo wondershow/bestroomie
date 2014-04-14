@@ -38,7 +38,7 @@ public class BRHeadPanelController extends BRAbstractController {
 		this.mainController = c;
 		this.refreshUI();
 		this.view.registerListener(this);
-		//this.view.getBrSettings().registerListener(this);
+		this.view.getBrSettings().registerListener(this);
 	}
 
 	/**
