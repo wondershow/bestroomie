@@ -23,7 +23,7 @@ public class BRSettings extends BRAbstractView {
 
 	public BRSettings() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setLayout(new BorderLayout(50,50));
 		// Create the radio buttons.
 		chngePasswordButtn = new JRadioButton(changePassword);
 		chngePasswordButtn.setSelected(true);
