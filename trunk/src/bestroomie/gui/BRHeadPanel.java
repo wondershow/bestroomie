@@ -79,10 +79,11 @@ public class BRHeadPanel extends BRMainPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton("Settings");
         jLabel1 = new javax.swing.JLabel();
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Settings");
+        jButton1.setActionCommand("Settings");
 
         jLabel1.setText("jLabel1");
 
@@ -106,6 +107,7 @@ public class BRHeadPanel extends BRMainPanel {
                     .addComponent(jButton1))
                 .addGap(47, 47, 47))
         );
+        brSettings = new BRSettings();
     }// </editor-fold>                        
 
     
