@@ -87,6 +87,7 @@ public class ChangePasswordGUI extends BRAbstractView {
         setLayout(new BorderLayout());
         add(p4, BorderLayout.CENTER);
         add(p5, BorderLayout.SOUTH);
+        this.setTitle("Change Password");
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
