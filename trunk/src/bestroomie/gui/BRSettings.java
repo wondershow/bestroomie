@@ -50,6 +50,7 @@ public class BRSettings extends BRAbstractView {
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		mainPanel.setOpaque(true); // content panes must be opaque
 		this.setContentPane(mainPanel);
+		this.setTitle("Settings");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		// Display the window.
