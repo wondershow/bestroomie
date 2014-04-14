@@ -85,6 +85,7 @@ public class UserRegisterGUI extends BRAbstractView {
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setTitle("Register");
 		
 	}
 	
