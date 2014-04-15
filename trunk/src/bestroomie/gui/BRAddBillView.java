@@ -109,7 +109,7 @@ public class BRAddBillView extends javax.swing.JFrame {
 
         jLabelAmount.setText("Amount");
 
-        jTextFieldAmount.setText("jTextField2");
+        jTextFieldAmount.setText("0.0");
 
         jLabelCatagory.setText("Catagory");
         
@@ -126,7 +126,7 @@ public class BRAddBillView extends javax.swing.JFrame {
 
         jLabelDescription.setText("Description");
 
-        jTextFieldDescription.setText("jTextField3");
+        jTextFieldDescription.setText("");
 
         jButtonAdd.setText("Add");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,8 @@ public class BRAddBillView extends javax.swing.JFrame {
     	
     	b.addNewBill(this.creator.getUserEmail());
     	
-    	
+    	this.dispose();
+    	this.setVisible(false);
     	
     	
     	//b.addNewBill(this.creator.getUserEmail());
