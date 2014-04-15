@@ -1,9 +1,5 @@
-user:email:password:group
+user:email:password:groups
 user1:user1@here.com:foo2:group1,Happy Group
 user2:user2@gmail.com:BAR:group2,group1,
 user3:user3@yahoo.com:BAZ:group1,group2,group3,
 lei:lei@here.com:FOO:group1,group2,group3,group4,cs
-test:test@here.com:test:group1,
-matt svensson:ms@gmail.com:mypassword:group1,group2
-matt:matt@here.com:TTAM:group1,group2,group3
-max:max@here.com:MAX:group1,group2,group3

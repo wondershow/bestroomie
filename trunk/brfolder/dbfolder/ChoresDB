@@ -1,6 +1,10 @@
 group:chore:date:assignment:completion
-group1:dishes:20140101:user1:no
-group1:dusting:20140108:lei:no
-group2:clean something:20140104:lei:yes
-group2:clean other thing:20140108:member2:no
-group1:other thing:20140108:matt:no
+group1:past dishes:20130101:user1:no
+group1:past dusting:20130108:lei:no
+group2:past clean something:20140104:lei:yes
+group2:past clean other thing:20140108:member2:no
+group1:future clean something:20140504:lei:yes
+group1:future clean other thing:20140508:member2:no
+group1:past mop:20140204:lie:no
+group1:future mop:45670123:lie:no
+group2:future dance:20150101:Bhola:no

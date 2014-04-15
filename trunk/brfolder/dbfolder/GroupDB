@@ -1,6 +1,6 @@
 group:member
-group1:ms@gmail.com,matt@here.com,max@here.com,lei@here.com,james@here.com
-group2:user2@gmail.com
-group3:user3@yahoo.com
-group4:user
-cs:user@gmail.com,tom@hotmail.com
+group1:user1@here.com,user2@gmail.com,user3@yahoo.com,lei@here.com
+group2:user2@gmail.com,user3@yahoo.com,lei@here.com
+group3:user3@yahoo.com,lei@here.com
+group4:lei@here.com
+cs:lei@here.com
