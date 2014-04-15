@@ -158,9 +158,9 @@ public void updateCaptchaImage() {
 
         JPanel p2 = new JPanel();
         p2.add(jbtOk);
-        p2.add(jbtCancel);
+//        p2.add(jbtCancel);
         p2.add(jbtRegister);
-        p2.add(jbtChangePassword);
+//        p2.add(jbtChangePassword);
 
         
         JPanel p5 = new JPanel(new BorderLayout());
