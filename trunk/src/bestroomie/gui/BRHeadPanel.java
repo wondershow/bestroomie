@@ -144,14 +144,14 @@ public class BRHeadPanel extends BRMainPanel {
     
     public void setText(String userId, String grpId, int num) {
     	
-    	String labelText = "BestRommie user " + BRUtil.fixedLenthString(userId, 10) + ", with " 
-    				       +  BRUtil.fixedLengthInt(num) + " members in " + BRUtil.fixedLenthString(grpId, 10);
+    	String labelText = "Best Roomie User " + BRUtil.fixedLenthString(userId, 5) + ", with " 
+    				       +  BRUtil.fixedLengthInt(num) + " members in " + BRUtil.fixedLenthString(grpId, 2);
     	
     	Font labelFont = jLabel1.getFont();
-    	int newFontSize = 18;
+    	int newFontSize = 14;
     	 
     	this.jLabel1.setText(labelText);
-    	this.jLabel1.setFont(new Font(labelFont.getName(),Font.ITALIC,newFontSize));
+    	this.jLabel1.setFont(new Font(labelFont.getName(),Font.BOLD, newFontSize));
     	
     }
     
