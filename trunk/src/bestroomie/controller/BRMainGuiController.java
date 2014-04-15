@@ -1,6 +1,7 @@
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -54,11 +55,12 @@ public class BRMainGuiController extends BRAbstractController {
 	}
 	
 	
-	public BRMainGuiController(BRUser u) {
+	public BRMainGuiController(BRUser u) throws ParseException {
 		this.user = u;
 		BRMainGui gui = new BRMainGui(BRBill.getAllSettledBillInGrp((this.user.getFirstGrpId()),u.getUserEmail()),
 									  BRBill.getAllImpendingBillInGrp((this.user.getFirstGrpId()),u.getUserEmail()),
-									  BRChore.getAllChoresInGrp((this.user.getFirstGrpId())),
+									  BRChore.getOldChoresInGrp((this.user.getFirstGrpId())), 
+									  BRChore.getFutureChoresInGrp((this.user.getFirstGrpId())),
 									  this.user.getUserEmail());
 		this.mainFrame = gui;
 		
@@ -114,7 +116,7 @@ public class BRMainGuiController extends BRAbstractController {
 		this.mainFrame.setVisible(true);
 	}
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ParseException {
 		BRUser user = new BRUser();
 		user.setUserEmail("lei@here.com");
 		user.load();

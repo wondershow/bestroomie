@@ -18,7 +18,11 @@ public class BRSettings extends BRAbstractView {
 	static String changePassword = "Change Password";
 	static String createGroup = "Create Group";
 	static String deleteGroup = "Delete Group";
-	JRadioButton chngePasswordButtn, createGroupButtn, deleteGroupButtn;
+	static String addUser = "Add user to Group";
+	static String removeUser = "Remove User from Group";
+	static String importDB = "Import Database";
+	static String exportDB = "Export Database";
+	JRadioButton chngePasswordButtn, createGroupButtn, deleteGroupButtn, addUserButton, removeUserButton, importButton, exportButton;
 	JButton submitButton = new JButton("Submit");
 
 	public BRSettings() {
@@ -31,12 +35,25 @@ public class BRSettings extends BRAbstractView {
 		createGroupButtn.setSelected(false);
 		deleteGroupButtn = new JRadioButton(deleteGroup);
 		deleteGroupButtn.setSelected(false);
+		addUserButton = new JRadioButton(addUser);
+		addUserButton.setSelected(false);
+		removeUserButton = new JRadioButton(removeUser);
+		removeUserButton.setSelected(false);
+		importButton = new JRadioButton(importDB);
+		importButton.setSelected(false);
+		exportButton = new JRadioButton(exportDB);
+		exportButton.setSelected(false);
 
 		// Group the radio buttons.
 		ButtonGroup group = new ButtonGroup();
 		group.add(chngePasswordButtn);
 		group.add(createGroupButtn);
 		group.add(deleteGroupButtn);
+		group.add(addUserButton);
+		group.add(removeUserButton);
+		group.add(importButton);
+		group.add(exportButton);
+
 		// this.add(settingsBtn,BorderLayout.EAST);
 		submitButton.setSize(6, 6);
 		mainPanel.add(submitButton, BorderLayout.SOUTH);
@@ -46,6 +63,10 @@ public class BRSettings extends BRAbstractView {
 		radioPanel.add(chngePasswordButtn);
 		radioPanel.add(createGroupButtn);
 		radioPanel.add(deleteGroupButtn);
+		radioPanel.add(addUserButton);
+		radioPanel.add(removeUserButton);
+		radioPanel.add(importButton);
+		radioPanel.add(exportButton);
 		mainPanel.add(radioPanel, BorderLayout.LINE_START);
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		mainPanel.setOpaque(true); // content panes must be opaque

@@ -8,6 +8,7 @@ package bestroomie.controller;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,7 +67,7 @@ public class BRGoupPanelController extends BRAbstractController implements ListS
 
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ParseException {
 		BRUser u = new BRUser();
 		u.setUserEmail("lei@here.com");
 		u.load();

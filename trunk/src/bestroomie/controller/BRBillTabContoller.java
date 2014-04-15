@@ -6,6 +6,7 @@ Class Description:
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -80,7 +81,7 @@ public class BRBillTabContoller extends BRAbstractController{
 		
 	}
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ParseException {
 		BRUser u = new BRUser();
 		u.setUserEmail("lei@here.com");
 		u.load();

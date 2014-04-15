@@ -2,6 +2,7 @@ package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import bestroomie.entities.BRAbstractEntity;
 import bestroomie.entities.BRUser;
@@ -46,7 +47,13 @@ public class BRLoginController extends BRAbstractController {
 					
 					//Go to MainUI
 					this.view.dispose();
-					BRMainGuiController mainGui = new BRMainGuiController(this.model);
+					BRMainGuiController mainGui = null;
+					try {
+						mainGui = new BRMainGuiController(this.model);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					mainGui.refreshUI();
 				}
 			}

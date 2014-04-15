@@ -1,6 +1,7 @@
 package bestroomie.controller;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 
@@ -32,23 +33,21 @@ public class BRChoreTabController extends BRAbstractController {
 		// TODO Auto-generated method stub
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws ParseException{
 		BRChore ch = new BRChore();
-//		ch.setChoreGroup("group1");
+		ch.setChoreGroup("group1");
 		ch.load();
 		
 		BRUser u = new BRUser();
 		u.setUserEmail("lei@here.com");
 		u.load();
 		
-		BRChoreTab p = new BRChoreTab(BRChore.getAllChoresInGrp("group1"));
+		BRChoreTab p = new BRChoreTab(BRChore.getOldChoresInGrp("group1"),BRChore.getFutureChoresInGrp("group1"));
 		BRMainGuiController mainController = new BRMainGuiController(u);
 		mainController.setSelectedGrp("group1");
 		BRChoreTabController c = new BRChoreTabController(p,mainController);
 		//c.setupGroupLists(u.getFirstGrpId());
 		//p.registerListener(c);
-		
-		
 		
 		JFrame frame = new JFrame();
 		frame.add(p);

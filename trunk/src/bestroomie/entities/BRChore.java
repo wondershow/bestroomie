@@ -1,10 +1,18 @@
 package bestroomie.entities;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import bestroomie.db.BRDBConnector;
 import bestroomie.util.BRConst;
 import bestroomie.util.CATAGORY_INDEX;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class BRChore extends BRAbstractEntity{
 
@@ -26,7 +34,7 @@ public class BRChore extends BRAbstractEntity{
 	
 		
 	public String getChoreGroup() {
-		return choreGroup;
+		return this.choreGroup;
 	}
 
 	public void setChoreGroup(String choreGroup) {
@@ -34,7 +42,7 @@ public class BRChore extends BRAbstractEntity{
 	}
 
 	public String getChoreDescription() {
-		return choreDescription;
+		return this.choreDescription;
 	}
 
 	public void setChoreDescription(String choreDescription) {
@@ -42,7 +50,7 @@ public class BRChore extends BRAbstractEntity{
 	}
 
 	public String getChoreDate() {
-		return choreDate;
+		return this.choreDate;
 	}
 
 	public void setChoreDate(String choreDate) {
@@ -50,7 +58,7 @@ public class BRChore extends BRAbstractEntity{
 	}
 
 	public String getChoreAssignment() {
-		return choreAssignment;
+		return this.choreAssignment;
 	}
 
 	public void setChoreAssignment(String choreAssignment) {
@@ -58,7 +66,7 @@ public class BRChore extends BRAbstractEntity{
 	}
 
 	public String getChoreCompletion() {
-		return choreCompletion;
+		return this.choreCompletion;
 	}
 
 	public void setChoreCompletion(String choreCompletion) {
@@ -131,28 +139,76 @@ public class BRChore extends BRAbstractEntity{
 		return res;
 	}
 	
-	public static ArrayList<BRChore> getAllChoresInGrp(String group) {
-		ArrayList<BRChore> res = new ArrayList<BRChore>();
+	public static ArrayList<BRChore> getOldChoresInGrp(String group) throws ParseException {
+		
+		//Set the current Date
+	 	Calendar cal = Calendar.getInstance();
+	 	cal.add(Calendar.DATE, 0);
+	 	   
+		ArrayList<BRChore> oldres = new ArrayList<BRChore>();
+		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_CHORESDB);
+		
+		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBChoreFile.COLUMN_OF_GROUP);
+		for(int i=0;i<lines.size();i++){
+			BRChore oldchore = new BRChore();
+			String line = lines.get(i);
+			
+			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
+			
+			//Parse a date from the database
+		 	DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		 	String lineDate = strArr[BRConst.DBChoreFile.COLUMN_OF_DATE];
+		 	Date someDate =   df.parse(lineDate);
+		 		   
+		 	oldchore.setChoreGroup(strArr[BRConst.DBChoreFile.COLUMN_OF_GROUP]);
+		 	oldchore.setChoreDescription(strArr[BRConst.DBChoreFile.COLUMN_OF_DESCRIPTION]);
+		 	oldchore.setChoreDate(strArr[BRConst.DBChoreFile.COLUMN_OF_DATE]);
+		 	oldchore.setChoreAssignment(strArr[BRConst.DBChoreFile.COLUMN_OF_ASSIGNMENT]);
+		 	oldchore.setChoreCompletion(strArr[BRConst.DBChoreFile.COLUMN_OF_COMPLETION]);
+		 	   
+		 	//If the date is in the future, skip to the next item
+		 	if (someDate.compareTo(cal.getTime()) != 1 )
+		 		oldres.add(oldchore);
+		}
+		return oldres;
+	} 
+
+	public static ArrayList<BRChore> getFutureChoresInGrp(String group) throws ParseException {
+		
+		//Set the current Date
+	 	Calendar cal = Calendar.getInstance();
+	 	cal.add(Calendar.DATE, 0);
+	 
+		ArrayList<BRChore> futureres = new ArrayList<BRChore>();
 		BRDBConnector dbConn = new BRDBConnector(BRConst.DBFile.FILE_NAME_CHORESDB);
 		System.out.println("Chores DB: " + BRConst.DBFile.FILE_NAME_CHORESDB);
 		
 		ArrayList<String> lines = dbConn.getAllMatchedRecords(group, BRConst.DBChoreFile.COLUMN_OF_GROUP);
 		System.out.println("lines: " + lines.size());
 		for(int i=0;i<lines.size();i++){
-			BRChore chore = new BRChore();
+			BRChore futurechore = new BRChore();
 			String line = lines.get(i);
 			System.out.println("Chores line: " + line);
 			
 			String strArr[] = line.split(BRConst.DBFile.FIELD_SEPERATOR );
-			chore.setChoreGroup(strArr[BRConst.DBChoreFile.COLUMN_OF_GROUP]);
-			chore.setChoreDescription(strArr[BRConst.DBChoreFile.COLUMN_OF_DESCRIPTION]);
-			chore.setChoreDate(strArr[BRConst.DBChoreFile.COLUMN_OF_DATE]);
-			chore.setChoreAssignment(strArr[BRConst.DBChoreFile.COLUMN_OF_ASSIGNMENT]);
-			chore.setChoreCompletion(strArr[BRConst.DBChoreFile.COLUMN_OF_COMPLETION]);
 
-			res.add(chore);
-		}
-		return res;
+			//Parse a date from the database
+		 	DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		 	String lineDate = strArr[BRConst.DBChoreFile.COLUMN_OF_DATE];
+		 	System.out.println(lineDate);
+		 	Date someDate =   df.parse(lineDate);
+			
+		 	futurechore.setChoreGroup(strArr[BRConst.DBChoreFile.COLUMN_OF_GROUP]);
+		 	futurechore.setChoreDescription(strArr[BRConst.DBChoreFile.COLUMN_OF_DESCRIPTION]);
+		 	futurechore.setChoreDate(strArr[BRConst.DBChoreFile.COLUMN_OF_DATE]);
+		 	futurechore.setChoreAssignment(strArr[BRConst.DBChoreFile.COLUMN_OF_ASSIGNMENT]);
+		 	futurechore.setChoreCompletion(strArr[BRConst.DBChoreFile.COLUMN_OF_COMPLETION]);
+
+		 	//If the date is in future, add it
+		 	if (someDate.compareTo(cal.getTime()) == 1 )
+		 		futureres.add(futurechore);
+ 	}
+		return futureres;
 	} 
 	
 }
