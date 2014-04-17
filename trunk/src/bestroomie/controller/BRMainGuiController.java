@@ -91,8 +91,6 @@ public class BRMainGuiController extends BRAbstractController {
 	
 
 	public void setupGUI() {
-
-		
 	}
 	
 	
@@ -137,6 +135,7 @@ public class BRMainGuiController extends BRAbstractController {
 		frame.add(p);
 		frame.pack();
 		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);*/
+		frame.setLocationRelativeTo(null);
+		*/
 	}
 }
