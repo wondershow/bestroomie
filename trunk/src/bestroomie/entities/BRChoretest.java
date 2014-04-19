@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class BRChore {
+public class BRChoretest {
 
 	private JFrame frmBrchore;
 	private JTable table;
