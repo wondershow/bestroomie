@@ -171,6 +171,59 @@ public class BRDBConnector {
 		return res;
 	}
 	
+	public boolean BRDBWriteUserDB(String line,String id, int fieldCount) {
+		boolean res = true;
+		boolean needToWriteNewLine = true;
+		FileReader fr;
+		BufferedReader br;
+		PrintWriter output = null;
+		String strInputLine = "";
+		String tmpFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + BRConst.DBFile.FILE_NAME_USERDB + "tmp";
+		String dbFileFullPath = BRConst.DBFile.PATH_TO_DB_FOLDER + BRConst.DBFile.FILE_NAME_USERDB;
+		
+		
+		try {
+			output = new PrintWriter(new FileWriter(tmpFileFullPath));
+			fr = new FileReader(dbFileFullPath);
+			br = new BufferedReader(fr);
+			
+			
+			strInputLine = br.readLine();
+			String[] fields; 
+			while(strInputLine != null) {
+				fields = strInputLine.split(this.fldSeperator);
+				//write only when the keyword does not exist in the file
+				if(fields[fieldCount].equals(id)) {
+					System.out.println("I am writing:");
+					System.out.println(line);
+					output.println(line);
+					needToWriteNewLine = false;
+				}
+				else
+					output.println(strInputLine);
+
+				strInputLine = br.readLine();
+			}
+			
+			if(needToWriteNewLine)
+				output.println(line);
+			output.close();
+			br.close();
+			
+			//to delete the old file and replace it with the swap file
+			File oldFile = new File(dbFileFullPath);
+			oldFile.delete();
+			File newFile = new File(tmpFileFullPath);
+			newFile.renameTo(oldFile);
+			
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+        
+		return res;
+	}
 	
 	public static void main(String args[]) {
 		BRDBConnector test = new BRDBConnector("userDB");

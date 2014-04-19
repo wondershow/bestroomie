@@ -23,7 +23,8 @@ public class BRHeadPanelController extends BRAbstractController {
 	private BRUser model;
 	private BRHeadPanel view;
 	private BRMainGuiController mainController;
-
+	private BRAddUsertoGroupController assistantController;
+	
 	/**
 	 * @param u
 	 *            the entity of login user
@@ -76,6 +77,30 @@ public class BRHeadPanelController extends BRAbstractController {
 				v.registerListener(c);
 				v.setVisible(true);
 			}
+//			if (selectedRadioButtonText.equals("Create Group")) {
+//				BRUser m = new BRUser("c", "d");
+//				ChangePasswordGUI v = new ChangePasswordGUI();
+//				BRChangePasswordController c = new BRChangePasswordController(
+//						m, v);
+//				v.registerListener(c);
+//				v.setVisible(true);
+//			}			
+			if (selectedRadioButtonText.equals("Add user to Group")) {
+				BRUser m = new BRUser("c", "d");
+				BRAddUserToGroupGUI v = new BRAddUserToGroupGUI();
+				BRAddUsertoGroupController c = new BRAddUsertoGroupController(
+						m, v, mainController, assistantController);
+				v.registerListener(c);
+				v.setVisible(true);
+			}
+//			if (selectedRadioButtonText.equals("Remove User from Group")) {
+//				BRUser m = new BRUser("c", "d");
+//				ChangePasswordGUI v = new ChangePasswordGUI();
+//				BRChangePasswordController c = new BRChangePasswordController(
+//						m, v);
+//				v.registerListener(c);
+//				v.setVisible(true);
+//			}
 		}
 	}
 

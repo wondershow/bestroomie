@@ -34,6 +34,7 @@ public final class BRConst {
 		public static final String ERROR_USER_ALREADY_EXISTS = "A user with that email already exists";
 		public static final String USER_ADDED = "You were successfully registered!  Welcome!";
 		public static final String PASSWORD_CHANGED = "Your password was successfully changed";
+		public static final String ADD_USER_TO_GROUP = "User was successfully added to the group";
 	}
 	
 	public static final class DBFile {
