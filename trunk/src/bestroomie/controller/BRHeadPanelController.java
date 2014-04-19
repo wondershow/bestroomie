@@ -24,7 +24,8 @@ public class BRHeadPanelController extends BRAbstractController {
 	private BRHeadPanel view;
 	private BRMainGuiController mainController;
 	private BRAddUsertoGroupController assistantController;
-	
+	private BRRemoveUserFromGroupController assistantController2;
+
 	/**
 	 * @param u
 	 *            the entity of login user
@@ -93,14 +94,14 @@ public class BRHeadPanelController extends BRAbstractController {
 				v.registerListener(c);
 				v.setVisible(true);
 			}
-//			if (selectedRadioButtonText.equals("Remove User from Group")) {
-//				BRUser m = new BRUser("c", "d");
-//				ChangePasswordGUI v = new ChangePasswordGUI();
-//				BRChangePasswordController c = new BRChangePasswordController(
-//						m, v);
-//				v.registerListener(c);
-//				v.setVisible(true);
-//			}
+			if (selectedRadioButtonText.equals("Remove User from Group")) {
+				BRUser m = new BRUser("c", "d");
+				BRRemoveUserFromGroupGUI v = new BRRemoveUserFromGroupGUI();
+				BRRemoveUserFromGroupController c = new BRRemoveUserFromGroupController(
+						m, v, mainController, assistantController2);
+				v.registerListener(c);
+				v.setVisible(true);
+			}
 		}
 	}
 
