@@ -58,7 +58,7 @@ public class BRRemoveUserFromGroupGUI extends BRAbstractView {
         setLayout(new BorderLayout());
         add(p4, BorderLayout.CENTER);
         add(p5, BorderLayout.SOUTH);
-        this.setTitle("Add User");
+        this.setTitle("Remove User From Group");
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
