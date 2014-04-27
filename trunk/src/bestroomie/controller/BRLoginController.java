@@ -19,6 +19,7 @@ public class BRLoginController extends BRAbstractController {
 	private BRUser model;
 	private BRLoginView view;
 	private int captchaWord;
+	private String uEmail;
 	//private BR
 	
 	public BRLoginController(BRUser m, BRLoginView v) {
@@ -26,6 +27,14 @@ public class BRLoginController extends BRAbstractController {
 		this.view = v;
 	}
 	
+	public String getuEmail() {
+		return uEmail;
+	}
+
+	public void setuEmail(String uEmail) {
+		this.uEmail = uEmail;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -47,6 +56,9 @@ public class BRLoginController extends BRAbstractController {
 					
 					//Go to MainUI
 					this.view.dispose();
+					this.model.setUserEmail(view.getuName());
+					setuEmail(view.getuName());
+					System.out.println("user name: " + view.getuName());
 					BRMainGuiController mainGui = null;
 					try {
 						mainGui = new BRMainGuiController(this.model);
@@ -55,6 +67,7 @@ public class BRLoginController extends BRAbstractController {
 						e1.printStackTrace();
 					}
 					mainGui.refreshUI();
+					
 				}
 			}
 			

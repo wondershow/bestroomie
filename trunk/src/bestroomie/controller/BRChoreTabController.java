@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import javax.swing.JFrame;
 
+import bestroomie.controller.*;
 import bestroomie.entities.*;
 import bestroomie.gui.*;
 import bestroomie.util.BRConst;
@@ -13,7 +14,7 @@ public class BRChoreTabController extends BRAbstractController {
 	
 	private BRChore chore;
 	private BRChoreTab view;
-	private BRMainGuiController mainController;
+	private static BRMainGuiController mainController;
 	
 	public BRChoreTabController(BRChoreTab p,BRMainGuiController c) {
 		this.view = p;
@@ -22,6 +23,11 @@ public class BRChoreTabController extends BRAbstractController {
 		ch.load();
 		this.chore = ch;
 		this.mainController = c;
+	}
+	
+	public void refreshUI(){
+		String grpId = mainController.getSelectedGrp().getGroupId();
+
 	}
 	
 	@Override
@@ -34,17 +40,21 @@ public class BRChoreTabController extends BRAbstractController {
 	}
 	
 	public static void main(String[] args) throws ParseException{
+		String grpId = mainController.getSelectedGrp().getGroupId();
+
+		
 		BRChore ch = new BRChore();
-		ch.setChoreGroup("group1");
+		ch.setChoreGroup(grpId);
+		System.out.println("Group ID under chores is: " + grpId);
 		ch.load();
 		
 		BRUser u = new BRUser();
-		u.setUserEmail("lei@here.com");
+		u.setUserEmail(mainController.getUser().getUserEmail());
 		u.load();
 		
-		BRChoreTab p = new BRChoreTab(BRChore.getOldChoresInGrp("group1"),BRChore.getFutureChoresInGrp("group1"));
+		BRChoreTab p = new BRChoreTab(BRChore.getOldChoresInGrp(grpId),BRChore.getFutureChoresInGrp(grpId));
 		BRMainGuiController mainController = new BRMainGuiController(u);
-		mainController.setSelectedGrp("group1");
+		mainController.setSelectedGrp(mainController.getSelectedGrp().getGroupId());
 		BRChoreTabController c = new BRChoreTabController(p,mainController);
 		//c.setupGroupLists(u.getFirstGrpId());
 		//p.registerListener(c);

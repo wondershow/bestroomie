@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-
+import bestroomie.controller.*;
 import bestroomie.entities.*;
 import bestroomie.gui.*;
 
@@ -31,7 +31,7 @@ public class BRMainGuiController extends BRAbstractController {
 		this.headController.refreshUI();
 		this.groupController.refreshUI();
 		this.grpPanelController.refreshUI();
-		
+		this.choreController.refreshUI();
 	}
 
 	/**
