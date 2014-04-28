@@ -4,4 +4,4 @@ user2:user2@gmail.com:BAR:group2,group1,
 user3:user3@yahoo.com:BAZ:group1,group2,group3,
 lei:lei@here.com:FOO2:group1,group2,group3,group4,cs
 new:new@here.com:BAR:group1
-newer:newer@here.com:as:group2,group4
+newer:newer@here.com:as:group2,group4,group1
